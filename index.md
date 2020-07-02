@@ -38,7 +38,7 @@ You can also use the script [subsetFwheudiconv.sh](https://github.com/PennLINC/R
 Some scans have been processed with an old version of fMRIPrep but all scans may need to be fMRIPrep'd again with the latest version of fMRIPrep. [runfMRIPrep.py](https://github.com/PennLINC/Reward/blob/master/oldScripts/runfMRIPrep.py) details the previous process of running fMRIPrep.
 
 ### Task files
-Files documenting all nifti scans and their associated task behavioral data can be found on Flywheel in the file `fwScansTask_20200624.csv` located in `Reward2018 > Information`. This file contains the following variables:
+Files documenting all nifti scans and their associated task behavioral data can be found on Flywheel in the file `fwScansTask_20200624.csv`. This file is located in `Reward2018 > Information` and contains the following variables:
 * `bblid`, `projects`
 * `scan_file`: name of the nifti
 * `bids`: BIDS name of the nifti
@@ -51,7 +51,7 @@ Another file, `missingTaskFiles_20200625.csv` documents a summary of the missing
 * `is_missing`: tells you whether the participant is missing is missing a task file, but since this spreadsheet is just of participants missing a task behavioral file, they all are
 * `n()`: tells you how many task behavioral files associated with a participant is missing
 
-If needed, [scanAuditFlywheel.py](https://github.com/PennLINC/Reward/blob/master/oldScripts/scanAuditFlywheel.py) goes through the process of generating a large spreadsheet of all files present in the Reward2018 project.
+If needed, [scanAuditFlywheel.py](https://github.com/PennLINC/Reward/blob/master/oldScripts/scanAuditFlywheel.py) goes through the process of generating a large spreadsheet of all files present in the Reward2018 project. To generate these associated files, use the script [scanTaskDocumentation.R](https://github.com/PennLINC/Reward/blob/master/oldScripts/scanTaskDocumention.R) which sources code from [classify_scans.R](https://github.com/PennLINC/Reward/blob/master/oldScripts/classify_scans.R) and [classify_task.R](https://github.com/PennLINC/Reward/blob/master/oldScripts/classify_task.R).
 
 ## Other data
 
