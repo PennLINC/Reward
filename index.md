@@ -1,3 +1,9 @@
+---
+title: Home
+layout: template
+filename: index.md
+--- 
+
 # Reward Documentation (2020)
 Last updated: July 1, 2020 <br>
 Written by Anna Xu
