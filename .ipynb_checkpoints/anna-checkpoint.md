@@ -1,7 +1,7 @@
 ---
 title: Anna (2018)
 layout: template
-filename: anna.md
+filename: anna
 --- 
 
 # Reward Documentation (2020)
