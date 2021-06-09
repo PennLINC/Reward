@@ -1,7 +1,7 @@
 ---
 title: Dataset Status Report
 layout: template
-filename: dataset_status_report
+filename: dsr
 --- 
 
 # Dataset Status Report
