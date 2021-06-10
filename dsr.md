@@ -16,9 +16,9 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 
 Data Narrative: NA
 
@@ -32,10 +32,9 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
-
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 Data Narrative: NA
 
 ## NEFF
@@ -47,9 +46,9 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 
 Data Narrative: NA
 
@@ -63,9 +62,9 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 
 Data Narrative: NA
 
@@ -79,9 +78,9 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 
 Data Narrative: NA
 
@@ -95,8 +94,8 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Yet to be downloaded
+DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
 
-Next Steps: NA
+Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
 
 Data Narrative: NA
