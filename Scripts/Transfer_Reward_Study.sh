@@ -14,4 +14,4 @@ fi
 
 echo running: fw export bids $DEST --project Reward2018 --session $SESSION
 
-fw export bids $DEST --project Reward2018 --session $SESSION
+fw export bids $DEST --project Reward2018 --session $SESSION --data-type anat --data-type func --data-type fmap

@@ -10,17 +10,17 @@ filename: dsr
 
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/fndm1`
 
 Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
 
-Data Narrative: NA
+Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## FNDM2
 
@@ -32,10 +32,11 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
-Data Narrative: NA
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+
+Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## NEFF
 RIA Store: NA
@@ -46,11 +47,11 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
 
-Data Narrative: NA
+Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## NEFF2
 
@@ -62,11 +63,11 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
 
-Data Narrative: NA
+Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## NODRA
 
@@ -78,11 +79,11 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
 
-Data Narrative: NA
+Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## DAY2
 
@@ -94,8 +95,8 @@ Datalad Status: NA
 
 Git Branch: NA
 
-DSR: Tried to download from `fw`, challenges arose with duplicated BIDS files. Ran `fw-heudiconv-tabulate` to begin overlooking heuristics.
+DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Fix heuristic curation (also examine Anna's old heuristics).
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
 
-Data Narrative: NA
+Data Narrative: `~/curation/code/DataNarrative.md`
