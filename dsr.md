@@ -18,7 +18,7 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -26,7 +26,7 @@ Data Narrative: `~/curation/code/DataNarrative.md`
 
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/fndm2`
 
 Datalad Status: NA
 
@@ -34,14 +34,15 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
 ## NEFF
+
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/neff`
 
 Datalad Status: NA
 
@@ -49,7 +50,7 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -57,7 +58,7 @@ Data Narrative: `~/curation/code/DataNarrative.md`
 
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/neff2`
 
 Datalad Status: NA
 
@@ -65,7 +66,7 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -73,7 +74,7 @@ Data Narrative: `~/curation/code/DataNarrative.md`
 
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/nodra`
 
 Datalad Status: NA
 
@@ -81,7 +82,7 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -89,7 +90,7 @@ Data Narrative: `~/curation/code/DataNarrative.md`
 
 RIA Store: NA
 
-CUBIC Path: NA
+CUBIC Path: `~/original_data/bidsdatasets/day2`
 
 Datalad Status: NA
 
@@ -97,6 +98,6 @@ Git Branch: NA
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Validate. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
