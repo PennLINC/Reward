@@ -12,9 +12,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/fndm1`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
@@ -28,9 +28,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/fndm2`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
@@ -44,9 +44,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/neff`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
@@ -60,9 +60,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/neff2`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
@@ -76,9 +76,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/nodra`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
@@ -92,9 +92,9 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/day2`
 
-Datalad Status: NA
+Datalad Status: saved, unlocked
 
-Git Branch: NA
+Git Branch: master
 
 DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
 
