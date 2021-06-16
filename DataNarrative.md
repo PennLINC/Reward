@@ -825,7 +825,19 @@ Below is the list of fields that were removed using `bond-remove-metadata-fields
 
 ```AcquisitionDateTime AcquisitionTime InstitutionAddress InstitutionName InstitutionalDepartmentName Name PatientPosition PatientSex StationName StudyID StudyInstanceUID```
 
+After these data were removed, we made a copy of the datasets and tracked the copy in `/cbica/projects/wolf_satterthwaite_reward/working/bidsdatasets`.
 
-```python
+# Curation
 
-```
+The majority of curation was accomplished by Anna on Flywheel. Early versions of her `fw-heudiconv` heuristics are available [here](https://github.com/PennLINC/Reward/tree/gh-pages/oldScripts/annaHeuristics2019). However, we found that when trying to export data from the project, Flywheel ran into errors due to slight curation issues. For e.g. in many cases, two or more NIfTIs had the same BIDS filename due to:
+
+- Duplication of an acquisition e.g. multiple T1w scans to account for a poor first attempt
+- Duplication of NIfTIs output from `dcm2nixx` e.g. a phase1-phase2 DICOM producing 3 NIfTIs
+- Heuristic not parsing reconstructed data e.g. T1w and T1w-MOCO 
+- Unexpected Diffusion scans produced by Seimens scanner (derived measures)
+
+A CSV tracking these decisions is available on CUBIC in `working/code/flywheel_transfer/duplicates_07062021.tsv`. In most cases, it sufficed to remove the offending duplicates' NIfTI (DICOMs remain intact). In the remaining cases, we adjusted Anna's heuristic to account for the changes. The updated versions of the heuristics are available in the [Scripts](https://github.com/PennLINC/Reward/tree/master/Scripts) directory.
+
+> **_NOTE:_**  We have yet to move any ASL to CUBIC due to the curation of ASL requiring much more involved work like acquiring scanner parameters from the technicians who ran the scans.
+
+Once moved to CUBIC, we found very few BIDS validation errors. When using `bond-validate` with the `--ignore_subject_consistency` and `--ignore_nifti_headers` flags, we only had to account for the `dataset_description` and `README` files. These were fixed and tracked in datalad.

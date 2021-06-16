@@ -12,13 +12,13 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/fndm1`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups. Q: **What is PACE**? Necessary?
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -28,13 +28,13 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/fndm2`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -44,13 +44,13 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/neff`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -60,13 +60,13 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/neff2`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -76,13 +76,13 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/nodra`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -92,12 +92,12 @@ RIA Store: NA
 
 CUBIC Path: `~/original_data/bidsdatasets/day2`
 
-Datalad Status: saved, unlocked
+Datalad Status: saved
 
 Git Branch: master
 
-DSR: Adjusted heuristics and relevant data on Flywheel using `fw-heudiconv`, and output data to CUBIC using `fw export bids`. Currently no ASL data has been transferred (need updated ASL BIDS spec).
+DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Update heuristic to accommodate most recent version of ASL data. Use `CuBIDS/BOnd` to validate and start grouping.
+Next Steps: Run BOnD group to find the key-groups.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
