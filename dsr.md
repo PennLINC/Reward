@@ -18,7 +18,7 @@ Git Branch: master
 
 DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Run BOnD group to find the key-groups. Q: **What is PACE**? Necessary?
+Next Steps: Q: **What is PACE**? Necessary? Remove any functional data < 3 mins
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -34,7 +34,7 @@ Git Branch: master
 
 DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Run BOnD group to find the key-groups.
+Next Steps: Remove any functional data < 3 mins.
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -48,9 +48,9 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: All BIDS valid datatypes. No ASL. Need to investigate (ask Dan) how some participants became `neffx2` and `neff2x2`.
 
-Next Steps: Run BOnD group to find the key-groups.
+Next Steps: Re-run grouping adjusting for echo time and voxeldim3 tolerance. Remove any functional data < 3 mins
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -66,7 +66,7 @@ Git Branch: master
 
 DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Run BOnD group to find the key-groups.
+Next Steps: Re-run grouping adjusting for echo time and voxeldim3 tolerance. Remove any functional data < 3 mins
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -82,7 +82,7 @@ Git Branch: master
 
 DSR: All BIDS valid datatypes. No ASL.
 
-Next Steps: Run BOnD group to find the key-groups.
+Next Steps: Re-run grouping -- remove `ParallelReductionFactor` from config; Remove any functional data < 3 mins
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -96,8 +96,8 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: All BIDS valid datatypes. No ASL. One subject from `day2x2` being converted and curated to be added to `day2`.
 
-Next Steps: Run BOnD group to find the key-groups.
+Next Steps: Run BOnD group to find the key-groups. For day2 grouping, remove `ParallelReductionFactor` from config. Additionally, remove DWI (not enough data). Also remove day2x2 subject..
 
 Data Narrative: `~/curation/code/DataNarrative.md`
