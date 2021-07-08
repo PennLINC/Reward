@@ -16,9 +16,9 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong. Currently sourcing task/event files. We have access to raw e-prime files for the ITC task.
 
-Next Steps: Q: **What is PACE**? Necessary? Remove any functional data < 3 mins
+Next Steps: Sourcing task/event files & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -32,9 +32,9 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong. Currently sourcing task/event files. We have access to raw e-prime files for the ITC task.
 
-Next Steps: Remove any functional data < 3 mins.
+Next Steps: Sourcing task/event files & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -48,9 +48,18 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL. Need to investigate (ask Dan) how some participants became `neffx2` and `neff2x2`.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong.
 
-Next Steps: Re-run grouping adjusting for echo time and voxeldim3 tolerance. Remove any functional data < 3 mins
+Lastly: 5 subjects missing B0map? 
+17230
+17651
+17869
+17888
+18094
+
+Checking flywheel, these folks don't have fmaps in their sourcedata.
+
+Next Steps: Sourcing events/task data & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -64,9 +73,9 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong. Currently sourcing task/event files.
 
-Next Steps: Re-run grouping adjusting for echo time and voxeldim3 tolerance. Remove any functional data < 3 mins
+Next Steps: Sourcing events/task data & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -80,9 +89,9 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong. Currently sourcing task/event files.
 
-Next Steps: Re-run grouping -- remove `ParallelReductionFactor` from config; Remove any functional data < 3 mins
+Next Steps: Sourcing events/task data & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
 
@@ -96,8 +105,8 @@ Datalad Status: saved
 
 Git Branch: master
 
-DSR: All BIDS valid datatypes. No ASL. One subject from `day2x2` being converted and curated to be added to `day2`.
+DSR: BIDS valid, CuBIDS-grouped, ready for gong. Currently sourcing task/event files.
 
-Next Steps: Run BOnD group to find the key-groups. For day2 grouping, remove `ParallelReductionFactor` from config. Additionally, remove DWI (not enough data). Also remove day2x2 subject..
+Next Steps: Sourcing events/task data & testing exemplars
 
 Data Narrative: `~/curation/code/DataNarrative.md`
