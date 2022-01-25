@@ -841,3 +841,12 @@ A CSV tracking these decisions is available on CUBIC in `working/code/flywheel_t
 > **_NOTE:_**  We have yet to move any ASL to CUBIC due to the curation of ASL requiring much more involved work like acquiring scanner parameters from the technicians who ran the scans.
 
 Once moved to CUBIC, we found very few BIDS validation errors. When using `bond-validate` with the `--ignore_subject_consistency` and `--ignore_nifti_headers` flags, we only had to account for the `dataset_description` and `README` files. These were fixed and tracked in datalad.
+
+Importantly, there were datasets that were recorded as `PROJECTx2`. These were confirmed to be repeat visits due to scanner error or incomplete sequences. These projects were removed as the complete scan was recorded in the main dataset (e.g. if a neff subject had to repeat a visit due to an error, the first visit was recorded as `neffx2`, and the completed visit was recorded as `neff` under a different scanID).
+
+After curation, functional BOLD data with less than 3 minutes were removed (`working/code/RemoveShortBOLD.ipynb`), along with their associated fieldmaps. Then, CuBIDS was used to assess heterogeneity in the datasets on a per project basis. We found that a small number of parameters relevant to diffusion were not useful and causing sparsity in the CuBIDS output, so these parameters were adjusted in the CuBIDS configuration file (`working/code/iterations/iter2/config.yml`). 
+
+
+```python
+
+```
