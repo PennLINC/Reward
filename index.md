@@ -1,7 +1,9 @@
 ---
+layout: default
 title: Home
-layout: template
-filename: index
+nav_order: 1
+description: "Reward Home"
+permalink: /
 --- 
 
 # Reward Documentation

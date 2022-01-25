@@ -1,6 +1,6 @@
 ---
 title: Data Narrative
-layout: template
+layout: default
 filename: DataNarrative
 --- 
 

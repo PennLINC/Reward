@@ -1,6 +1,6 @@
 ---
 title: Dataset Status Report
-layout: template
+layout: default
 filename: dsr
 --- 
 

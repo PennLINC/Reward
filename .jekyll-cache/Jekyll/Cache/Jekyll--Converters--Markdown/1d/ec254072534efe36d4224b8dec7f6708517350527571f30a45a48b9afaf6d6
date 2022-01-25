@@ -1,0 +1,99 @@
+I"±
+<h1 id="dataset-status-report">Dataset Status Report</h1>
+
+<h2 id="fndm1">FNDM1</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/fndm1</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups. Q: <strong>What is PACE</strong>? Necessary?</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+
+<h2 id="fndm2">FNDM2</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/fndm2</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups.</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+
+<h2 id="neff">NEFF</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/neff</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups.</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+
+<h2 id="neff2">NEFF2</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/neff2</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups.</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+
+<h2 id="nodra">NODRA</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/nodra</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups.</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+
+<h2 id="day2">DAY2</h2>
+
+<p>RIA Store: NA</p>
+
+<p>CUBIC Path: <code class="language-plaintext highlighter-rouge">~/original_data/bidsdatasets/day2</code></p>
+
+<p>Datalad Status: saved</p>
+
+<p>Git Branch: master</p>
+
+<p>DSR: All BIDS valid datatypes. No ASL.</p>
+
+<p>Next Steps: Run BOnD group to find the key-groups.</p>
+
+<p>Data Narrative: <code class="language-plaintext highlighter-rouge">~/curation/code/DataNarrative.md</code></p>
+:ET

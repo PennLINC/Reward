@@ -1,7 +1,9 @@
 ---
-title: Anna (2018-2020)
-layout: template
+title: Legacy Curation (2018-2020)
+layout: default
 filename: anna
+has_toc: true
+nav_order: 2
 --- 
 
 # Reward Documentation (2020)

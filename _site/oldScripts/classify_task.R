@@ -1,0 +1,12 @@
+fw_task$task <- (ifelse(grepl("cardA", fw_task$file), "card1",
+                        ifelse(grepl("cardB", fw_task$file), "card2",
+                               ifelse(grepl("faceA", fw_task$file), "face1",
+                                      ifelse(grepl("faceB", fw_task$file), "face2",
+                                             ifelse(grepl("effort1", fw_task$file), "effort1",
+                                                    ifelse(grepl("effort2", fw_task$file), "effort2",
+                                                           ifelse(grepl("effort3", fw_task$file), "effort3",
+                                                                  ifelse(grepl("effort4", fw_task$file), "effort4",
+                                                                         ifelse(grepl("itc1", fw_task$file), "itc1",
+                                                                                ifelse(grepl("itc2", fw_task$file), "itc2",
+                                                                                       ifelse(grepl("itc3", fw_task$file), "itc3",
+                                                                                              ifelse(grepl("itc4", fw_task$file), "itc4", NA)))))))))))))

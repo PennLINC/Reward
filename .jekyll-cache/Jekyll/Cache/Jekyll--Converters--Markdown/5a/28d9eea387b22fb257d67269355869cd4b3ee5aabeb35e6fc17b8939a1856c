@@ -1,0 +1,82 @@
+I"� <h1 id="reward-documentation-2020">Reward Documentation (2020)</h1>
+<p>Last updated: July 1, 2020 <br />
+Written by Anna Xu</p>
+
+<p>Reward is a dataset comprised of 6 projects collected over the span of years, totaling 509 participants (note that some participants were present in multiple projects). These are the 6 projects with the scans available in them:</p>
+<ul>
+  <li><strong>FNDM1</strong>: T1w, ASL, b0 phase 1 and 2, b0 magnitude, resting-state, task fMRI (face run 1 and 2; card run 1 and 2)</li>
+  <li><strong>FNDM2</strong>: T1w, b0 phase 1 and 2, b0 magnitude, resting-state, task fMRI (itc runs 1-4)</li>
+  <li><strong>NEFF</strong>: T1w, b0 phasediff, b0 magnitude, task fMRI (effort runs 1-4)
+    <ul>
+      <li>Note that 15 participants from FNDM2 have been reclassified into NEFF because they are neff pilots identified by Dan</li>
+    </ul>
+  </li>
+  <li><strong>NEFF2</strong>: T1w, b0 phasediff, b0 magnitude, task fMRI (effort runs 1-4)</li>
+  <li><strong>NODRA</strong>: T1w, b0 phasediff, b0 magnitude, resting-state, task fMRI (card runs 1-2, itc runs 1-2)
+    <ul>
+      <li>Note that some participants have multiband resting-state scans while others have single band or both</li>
+    </ul>
+  </li>
+  <li><strong>DAY2</strong>: T1w, ASL, b0 phase 1 and 2, b0 magnitude, resting-state, task fMRI (face run 1 and 2; card run 1 and 2), and DTI for very few participants (n&lt;20)</li>
+</ul>
+
+<h2 id="imaging--task-data-status-flywheel">Imaging &amp; Task Data Status (Flywheel)</h2>
+
+<h2 id="scan-data--associated-task-behavioral-data">Scan data &amp; associated task behavioral data</h2>
+
+<h3 id="completeness">Completeness</h3>
+
+<p>All scan data found on XNAT and associated task behavioral data found on XNAT or CfN has been uploaded onto Flywheel in the project <code class="language-plaintext highlighter-rouge">Reward2018</code>. Scan data was de-identified by uploading with the command <code class="language-plaintext highlighter-rouge">fw import dicom ${dicomUploadPath} mcieslak "Reward2018" --subject ${bblid} --session ${subproject} -y --profile "dicom_config.yaml"</code> in the command line and with the configuration file <code class="language-plaintext highlighter-rouge">dicom_config.yaml</code> found on Flywheel in <code class="language-plaintext highlighter-rouge">Reward2018 &gt; Information</code>.</p>
+
+<p>The following procedure checked to make sure all expected scans on XNAT were accounted for on Flywheel:</p>
+<ul>
+  <li>All participants on XNAT were cross-checked with all participants on Flywheel to ensure that each expected participant in Reward had their scans on Flywheel.</li>
+  <li>For each individual participant, completeness of scans were checked. If a participant did not have all the scans expected based on the project they were from, the missing scans were checked for on XNAT. If they existed on XNAT, the scans were uploaded onto Flywheel. If they were <em>not</em> on XNAT, they were documented on an excel file found on Flywheel in <code class="language-plaintext highlighter-rouge">Reward2018 &gt; information &gt; missingScans_20200624.xls</code> with any notes from XNAT documented.
+    <ul>
+      <li>This excel file contains the sheet <code class="language-plaintext highlighter-rouge">missingScanNotes</code> which details the bblid, project, scan missing, reason for scan missing (either not on xnat, upload error, or excluded participant), notes from xnat, and notes I’ve written.</li>
+      <li>The other sheet on this spreadsheet is <code class="language-plaintext highlighter-rouge">missingScanCount</code> which contains the number of scans missing for each particular scan in each project.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Scanid for each participant has also been noted in the custom info for each subject/session.</p>
+
+<h3 id="fw-heudiconv">Fw-heudiconv</h3>
+
+<p>These scans have also been fw’heudiconv-ed using <a href="https://github.com/PennLINC/Reward/tree/master/oldScripts/annaHeuristics2019">these heuristics</a> and the command <code class="language-plaintext highlighter-rouge">fw-heudiconv-curate --project "Reward2018" --heuristic "${heuristicFile}" --session "${subproject}" --subject "${bblid}"</code>.</p>
+
+<p>You can also use the script <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/annaHeuristics2019/subsetFwheudiconv.sh">subsetFwheudiconv.sh</a> to mass run fw-heudiconv for a select few participants.</p>
+
+<h3 id="fmriprep">fMRIPrep</h3>
+<p>Some scans have been processed with an old version of fMRIPrep but all scans may need to be fMRIPrep’d again with the latest version of fMRIPrep. <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/runfMRIPrep.py">runfMRIPrep.py</a> details the previous process of running fMRIPrep.</p>
+
+<h3 id="task-files">Task files</h3>
+<p>Files documenting all nifti scans and their associated task behavioral data can be found on Flywheel in the file <code class="language-plaintext highlighter-rouge">fwScansTask_20200624.csv</code>. This file is located in <code class="language-plaintext highlighter-rouge">Reward2018 &gt; Information</code> and contains the following variables:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bblid</code>, <code class="language-plaintext highlighter-rouge">projects</code></li>
+  <li><code class="language-plaintext highlighter-rouge">scan_file</code>: name of the nifti</li>
+  <li><code class="language-plaintext highlighter-rouge">bids</code>: BIDS name of the nifti</li>
+  <li><code class="language-plaintext highlighter-rouge">file_type</code>: type of scan (e.g., b0 magnitude, resting-state, etc.)</li>
+  <li><code class="language-plaintext highlighter-rouge">assoc_task_file</code>: name of task file uploaded onto Flywheel that is associated with the particular scan</li>
+  <li><code class="language-plaintext highlighter-rouge">is_task</code>: tells you whether the scan is a task fMRI scan</li>
+  <li><code class="language-plaintext highlighter-rouge">is_task_missing</code>: tells you whether the associated task file for a task fMRI scan is missing.</li>
+</ul>
+
+<p>Another file, <code class="language-plaintext highlighter-rouge">missingTaskFiles_20200625.csv</code> documents a summary of the missing task files. This file is currently on the <code class="language-plaintext highlighter-rouge">reward_data_mgmt</code> slack channel (unsure if this is also on the Reward2018 project on Flywheel due to inability to check Flywheel before my departure). This file contains the following:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">is_missing</code>: tells you whether the participant is missing is missing a task file, but since this spreadsheet is just of participants missing a task behavioral file, they all are</li>
+  <li><code class="language-plaintext highlighter-rouge">n()</code>: tells you how many task behavioral files associated with a participant is missing</li>
+</ul>
+
+<p>If needed, <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/scanAuditFlywheel.py">scanAuditFlywheel.py</a> goes through the process of generating a large spreadsheet of all files present in the Reward2018 project. To generate these associated files, use the script <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/scanTaskDocumention.R">scanTaskDocumentation.R</a> which sources code from <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/classify_scans.R">classify_scans.R</a> and <a href="https://github.com/PennLINC/Reward/blob/master/oldScripts/classify_task.R">classify_task.R</a>.</p>
+
+<h2 id="other-data">Other data</h2>
+
+<h3 id="demographics-medication-status-diagnosis">Demographics, Medication Status, Diagnosis</h3>
+
+<p>Demographics, medication status, diagnosis, and effort data are currently with Dan (not uploaded anywhere). Missing data has been previously reported in the <code class="language-plaintext highlighter-rouge">reward_data_mgmt</code> slack channel.</p>
+
+<h3 id="aylins-monster">Aylin’s Monster</h3>
+
+<p>Aylin’s monster scripts can be found in the Reward GitHub repo by clicking <a href="https://github.com/PennLINC/Reward/tree/master/oldScripts/aylinsMonster">here</a>. A wiki page of old documentation for Aylin’s monster can be found <a href="https://github.com/PennLINC/Reward/wiki/Aylin's-Monster-(OLD)">here</a>.</p>
+:ET
