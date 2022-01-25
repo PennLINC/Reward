@@ -1,0 +1,297 @@
+I"�/<h1 class="no_toc" id="nodra">Nodra</h1>
+
+<details open="">
+  <summary class="text-delta">
+    Table of contents
+  </summary>
+<ol id="markdown-toc">
+  <li><a href="#data-processing-flow--important-links" id="markdown-toc-data-processing-flow--important-links">Data Processing Flow &amp; Important Links:</a></li>
+  <li><a href="#plan-for-the-data" id="markdown-toc-plan-for-the-data">Plan for the Data</a></li>
+  <li><a href="#data-acquisition" id="markdown-toc-data-acquisition">Data Acquisition</a></li>
+  <li><a href="#download-and-storage" id="markdown-toc-download-and-storage">Download and Storage</a></li>
+  <li><a href="#curation-process" id="markdown-toc-curation-process">Curation Process</a>    <ol>
+      <li><a href="#bids-validation" id="markdown-toc-bids-validation">BIDS Validation:</a></li>
+      <li><a href="#bids-optimization" id="markdown-toc-bids-optimization">BIDS Optimization:</a></li>
+    </ol>
+  </li>
+  <li><a href="#preprocessing-pipelines" id="markdown-toc-preprocessing-pipelines">Preprocessing Pipelines</a>    <ol>
+      <li><a href="#fmriprep-version-2023" id="markdown-toc-fmriprep-version-2023">fMRIPrep (version 20.2.3)</a>        <ol>
+          <li><a href="#exemplar-testing" id="markdown-toc-exemplar-testing">Exemplar Testing:</a></li>
+          <li><a href="#production-testing" id="markdown-toc-production-testing">Production Testing:</a></li>
+        </ol>
+      </li>
+      <li><a href="#xcp-abcd-version-008" id="markdown-toc-xcp-abcd-version-008">XCP-ABCD (version 0.0.8)</a>        <ol>
+          <li><a href="#production-testing-1" id="markdown-toc-production-testing-1">Production Testing:</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li><a href="#post-processing" id="markdown-toc-post-processing">Post Processing</a>    <ol>
+      <li><a href="#to-do" id="markdown-toc-to-do">To Do</a></li>
+    </ol>
+  </li>
+</ol>
+
+</details>
+
+<h1 id="data-processing-flow--important-links">Data Processing Flow &amp; Important Links:</h1>
+<ul>
+  <li>Flow diagram that describes the lifecycle of this dataset curation and preprocessing:</li>
+</ul>
+
+<p><img src="../DataProcessingFlow_nodra.drawio.png" alt="flow" /></p>
+
+<ul>
+  <li>DSR GitHub Project Page(Curation/Validation and Processing Queue Status):</li>
+</ul>
+
+<p><a href="https://github.com/PennLINC/Reward/projects/1">https://github.com/PennLINC/Reward/projects/1</a></p>
+
+<h1 id="plan-for-the-data">Plan for the Data</h1>
+
+<ul>
+  <li>Why does PennLINC need this data?
+    <blockquote>
+      <p>Acquired at UPenn</p>
+    </blockquote>
+  </li>
+  <li>For which project(s) is it intended? Please link to project pages below:
+    <blockquote>
+      <p><a href="https://github.com/PennLINC/Reward/">Reward Project</a></p>
+    </blockquote>
+  </li>
+  <li>Goal:
+    <blockquote>
+      <p>Curate and preprocess an amalgam of datasets for a harmonized PennLINC resource</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h1 id="data-acquisition">Data Acquisition</h1>
+
+<ul>
+  <li>Data acquired by Dan Wolf &amp; Ted Satterthwaite</li>
+  <li>Describe the data:
+    <ul>
+      <li>number of subjects = 103</li>
+      <li>types of images = bold (4 runs task-ITC, rest), T1w, fieldmaps</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="download-and-storage">Download and Storage</h1>
+
+<ul>
+  <li>Original data available on Flywheel</li>
+  <li>Source data (NIfTI) on CUBIC in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/original_data/bidsdatasets/nodra</code>.</li>
+  <li>Data was copied to <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/nodra</code> and checked in to <code class="language-plaintext highlighter-rouge">datalad</code> after removing PHI (below)</li>
+  <li>
+    <p>JSON’s within origial_data were updated using <code class="language-plaintext highlighter-rouge">cubids-add-nifti-info</code>.</p>
+  </li>
+  <li>Listing metadata fields using <code class="language-plaintext highlighter-rouge">cubids-print-metadata-fields</code> gave the following fields:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Acknowledgements
+AcquisitionDateTime
+AcquisitionMatrixPE
+AcquisitionNumber
+AcquisitionTime
+Authors
+BIDSVersion
+BandwidthPerPixelPhaseEncode
+BaseResolution
+CoilString
+ConversionSoftware
+ConversionSoftwareVersion
+DatasetDOI
+DeidentificationMethod
+DerivedVendorReportedEchoSpacing
+DeviceSerialNumber
+DwellTime
+EchoNumber
+EchoTime
+EchoTime1
+EchoTime2
+EchoTrainLength
+EffectiveEchoSpacing
+FlipAngle
+Funding
+HowToAcknowledge
+ImageOrientationPatientDICOM
+ImageType
+ImagingFrequency
+InPlanePhaseEncodingDirectionDICOM
+InstitutionAddress
+InstitutionName
+InstitutionalDepartmentName
+IntendedFor
+InversionTime
+License
+MRAcquisitionType
+MagneticFieldStrength
+Manufacturer
+ManufacturersModelName
+Modality
+Name
+ParallelReductionFactorInPlane
+PartialFourier
+PatientPosition
+PatientSex
+PercentPhaseFOV
+PhaseEncodingDirection
+PhaseEncodingSteps
+PhaseResolution
+PixelBandwidth
+ProcedureStepDescription
+ProtocolName
+PulseSequenceDetails
+ReceiveCoilName
+ReconMatrixPE
+RefLinesPE
+ReferencesAndLinks
+RepetitionTime
+SAR
+ScanOptions
+ScanningSequence
+SequenceName
+SequenceVariant
+SeriesDescription
+SeriesInstanceUID
+SeriesNumber
+ShimSetting
+SliceThickness
+SliceTiming
+SoftwareVersions
+SpacingBetweenSlices
+StationName
+StudyID
+StudyInstanceUID
+TaskName
+TotalReadoutTime
+TxRefAmp
+template
+ImageComments
+MultibandAccelerationFactor
+</code></pre></div></div>
+
+<p>Offending fields were removed with <code class="language-plaintext highlighter-rouge">cubids-remove-metadata-fields</code> in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/metadatafields_remove.sh</code></p>
+
+<h1 id="curation-process">Curation Process</h1>
+
+<ul>
+  <li>Data curation by Tinashe Tapera on the CUBIC project user <code class="language-plaintext highlighter-rouge">wolfsatterthwaitereward</code></li>
+  <li>Link to final CuBIDS csvs: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/iterations/iteration7/nodra/</code></li>
+</ul>
+
+<h2 id="bids-validation">BIDS Validation:</h2>
+
+<ul>
+  <li>
+    <p>Data with short bold time series (&lt;3mins) were removed with the Notebook <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/RemoveShortBOLD.ipynb</code></p>
+  </li>
+  <li>
+    <p>All validation outputs are available in chronological order in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/validate_outputs/nodra</code>; most recent validation errors being:</p>
+
+    <ul>
+      <li>
+        <p>EVENTS_TSV_MISSING ( Task scans should have a corresponding events.tsv file. If this is a resting state scan you can ignore this warning or rename the task to include the word “rest”. ) : 386 counts</p>
+      </li>
+      <li>
+        <p>README_FILE_MISSING ( The recommended file /README is missing. See Section 03 (Modality agnostic files) of the BIDS specification. ) : 1 count</p>
+      </li>
+      <li>
+        <p>NO_AUTHORS ( The Authors field of dataset_description.json should contain an array of fields - with one author per field. This was triggered because there are no authors, which will make DOI registration from dataset metadata impossible. ) : 1 count</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Data at this stage were approved for preprocessing.</p>
+
+<h2 id="bids-optimization">BIDS Optimization:</h2>
+
+<ul>
+  <li>
+    <p>All cubids optimization results are available in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/iterations/iter&lt;ITERATION_NUMBER&gt;/nodra/</code></p>
+  </li>
+  <li>
+    <p>Final optimization resulted in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/iterations/iter6/nodra/nodra_summary.csv</code></p>
+  </li>
+</ul>
+
+<h1 id="preprocessing-pipelines">Preprocessing Pipelines</h1>
+
+<h2 id="fmriprep-version-2023">fMRIPrep (version 20.2.3)</h2>
+<ul>
+  <li>Tinashe Tapera was responsible for running preprocessing pipelines/audits on CUBIC</li>
+</ul>
+
+<h3 id="exemplar-testing">Exemplar Testing:</h3>
+
+<ul>
+  <li>Used cubids to create exemplar dataset: <code class="language-plaintext highlighter-rouge">cubids-copy-exemplars /cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/nodra/BIDS /cbica/projects/wolf_satterthwaite_reward/Testing/nodra/exemplars_dir /cbica/projects/wolf_satterthwaite_reward/Curation/code/iterations/iter6/nodra/nodra_AcqGrouping.csv</code></li>
+  <li>Path to exemplar dataset (annexed to datalad): <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Testing/nodra/exemplars_dir</code></li>
+  <li>
+    <p>Path to fmriprep container: Original in <code class="language-plaintext highlighter-rouge">~/dropbox</code>, datalad in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Testing/exemplars_test/fmriprep-container</code></p>
+  </li>
+  <li>Adjustments:
+    <ul>
+      <li>During testing, some fieldmaps were found to be corrupt/unusable for the data, and were removed. These files are in <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/code/iterations/cubids-testing_adjustments/nodra/purge_no_fmaps.txt</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Testing directory was deleted to save space on CUBIC on 12/2/21, once production completed</p>
+
+<h3 id="production-testing">Production Testing:</h3>
+
+<ul>
+  <li>102/103 subjects completed fMRIPrep successfully</li>
+  <li>Path to production inputs: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/nodra/BIDS</code></li>
+  <li>Path to fmriprep run command: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/fmriprep/analysis/code/fmriprep_zip.sh</code></li>
+  <li>Path to production outputs: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/fmriprep/output_ria</code></li>
+  <li>Path to fmriprep production audit: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/fmriprep/-audit/FMRIPREP_AUDIT.csv</code></li>
+  <li>Path to freesurfer production audit: NA</li>
+</ul>
+
+<h2 id="xcp-abcd-version-008">XCP-ABCD (version 0.0.8)</h2>
+<h3 id="production-testing-1">Production Testing:</h3>
+
+<ul>
+  <li>102/103 subjects completed XCP successfully</li>
+  <li>Path to production inputs: ``/cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/nodra/fmriprep/merge_ds`</li>
+  <li>Path to xcp run command: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/xcp/analysis/code/xcp_zip.sh</code></li>
+  <li>Path to production outputs: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/xcp/output_ria</code></li>
+  <li>Path to xcp production audit: NA</li>
+  <li>Path to xcp derivatives: <code class="language-plaintext highlighter-rouge">/cbica/projects/wolf_satterthwaite_reward/Production/nodra/xcp-derivatives/XCP</code></li>
+  <li>Path to xcp derivatives (concatenated): NA</li>
+</ul>
+
+<h1 id="post-processing">Post Processing</h1>
+
+<ul>
+  <li>Who is using the data/for which projects are people in the lab using this data?
+    <ul>
+      <li>Link to project page(s) here</li>
+    </ul>
+  </li>
+  <li>For each post-processing analysis that has been run on this data, fill out the following
+    <ul>
+      <li>Who performed the analysis?</li>
+      <li>Where it was performed (CUBIC, PMACS, somewhere else)?</li>
+      <li>GitHub Link(s) to result(s)</li>
+      <li>Did you use pennlinckit?
+        <ul>
+          <li>https://github.com/PennLINC/PennLINC-Kit/tree/main/pennlinckit</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="to-do">To Do</h3>
+<ul>
+  <li>backup to PMACS</li>
+  <li>Add task events files</li>
+</ul>
+:ET
