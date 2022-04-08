@@ -31,7 +31,7 @@ def infotodict(seqinfo):
 MetadataExtras = {
     pcasl: {
         'ArterialSpinLabelingType': 'PCASL',
-        "LabelingDuration": 1.5088,
+        "LabelingDuration": 1.517,
         "PostLabelingDelay": 1.2,
         "BackgroundSuppression": False,
         'M0Type': 'Absent', 
