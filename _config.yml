@@ -1,8 +1,8 @@
-theme: pmarsceill/just-the-docs
+#theme: pmarsceill/just-the-docs
 remote_theme: pmarsceill/just-the-docs
 title: Reward Project Documentation
 description: Documentation of Reward Data Processing and Analysis
-baseurl: "/" # the subpath of your site, e.g. /blog
+#baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://github.com/PennLINC/Reward" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
 exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"]
