@@ -1,4 +1,4 @@
-theme: just-the-docs
+theme: pmarsceill/just-the-docs
 remote_theme: pmarsceill/just-the-docs
 title: Reward Project Documentation
 description: Documentation of Reward Data Processing and Analysis
