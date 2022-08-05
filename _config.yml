@@ -20,8 +20,8 @@
 
 title: Reward Project Documentation
 description: Documentation of Reward Data Processing and Analysis
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://github.com/PennLINC/Reward" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/Reward" # the subpath of your site, e.g. /blog
+url: "https://github.com/PennLINC" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 permalink: pretty
