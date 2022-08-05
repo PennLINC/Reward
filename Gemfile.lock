@@ -70,11 +70,10 @@ GEM
     webrick (1.7.0)
 
 PLATFORMS
-  ruby
   x86_64-darwin-19
 
 DEPENDENCIES
-  bundler (~> 2.1.4)
+  bundler (~> 2.3.5)
   just-the-docs!
   webrick (~> 1.7)
 
