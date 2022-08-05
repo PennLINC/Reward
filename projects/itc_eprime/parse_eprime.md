@@ -1,0 +1,944 @@
+---
+layout: default
+title: Parsing EPrime Files
+parent: E-Prime
+nav_order: 1
+---
+
+This notebook parses the eprime files into BIDS valid events TSVs.
+
+    if (!require("pacman")) install.packages("pacman")
+
+    ## Loading required package: pacman
+
+    pacman::p_load(rprime, dplyr, tidyverse, rjson)
+
+Let’s start with an example:
+
+    rp <- read_eprime("~/dropbox/rawbx/RTG1_1ITCscanner1LLA-05200-1.txt")
+
+    experiment_data <- FrameList(rp)
+    message("Structure of eprime:")
+
+    ## Structure of eprime:
+
+    print(preview_frames(experiment_data))
+
+    ## 
+    ##  Eprime.Level Running Procedure
+    ##             1  Header    Header
+    ## List of 17
+    ##  $ Eprime.Level       : num 1
+    ##  $ Eprime.LevelName   : chr "Header_"
+    ##  $ Eprime.Basename    : chr "RTG1_1ITCscanner1LLA-05200-1"
+    ##  $ Eprime.FrameNumber : chr "1"
+    ##  $ Procedure          : chr "Header"
+    ##  $ Running            : chr "Header"
+    ##  $ VersionPersist     : chr "1"
+    ##  $ LevelName          : chr "LogLevel10"
+    ##  $ Experiment         : chr "RTG1_1ITCscanner1LLA"
+    ##  $ SessionDate        : chr "06-10-2011"
+    ##  $ SessionTime        : chr "13:30:30"
+    ##  $ SessionTimeUtc     : chr "5:30:30 PM"
+    ##  $ Subject            : chr "05200"
+    ##  $ Session            : chr "1"
+    ##  $ RandomSeed         : chr "1055496015"
+    ##  $ Group              : chr "1"
+    ##  $ Display.RefreshRate: chr "60.052"
+    ##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+    ## 
+    ##  Eprime.Level   Running Procedure
+    ##             3 TrialList TrialProc
+    ## List of 66
+    ##  $ Eprime.Level                     : num 3
+    ##  $ Eprime.LevelName                 : chr "TrialList_1"
+    ##  $ Eprime.Basename                  : chr "RTG1_1ITCscanner1LLA-05200-1"
+    ##  $ Eprime.FrameNumber               : chr "2"
+    ##  $ Procedure                        : chr "TrialProc"
+    ##  $ Running                          : chr "TrialList"
+    ##  $ Offer                            : chr "23"
+    ##  $ delay                            : chr "21"
+    ##  $ NullDuration                     : chr "5000"
+    ##  $ LeftRight                        : chr "0"
+    ##  $ FeedbackDur                      : chr "1672"
+    ##  $ Cycle                            : chr "1"
+    ##  $ Sample                           : chr "1"
+    ##  $ nullscreen.OnsetDelay            : chr "303"
+    ##  $ nullscreen.OnsetTime             : chr "54348"
+    ##  $ nullscreen.DurationError         : chr "-303"
+    ##  $ nullscreen.StartTime             : chr "54047"
+    ##  $ nullscreen.OffsetTime            : chr "58845"
+    ##  $ nullscreen.FinishTime            : chr "58845"
+    ##  $ nullscreen.ActionDelay           : chr "0"
+    ##  $ nullscreen.ActionTime            : chr "54348"
+    ##  $ nullscreen.OffsetDelay           : chr "0"
+    ##  $ Choice1.OnsetDelay               : chr "0"
+    ##  $ Choice1.OnsetTime                : chr "59045"
+    ##  $ Choice1.DurationError            : chr "-999999"
+    ##  $ Choice1.Duration                 : chr "4000"
+    ##  $ Choice1.StartTime                : chr "58846"
+    ##  $ Choice1.OffsetTime               : chr "61373"
+    ##  $ Choice1.FinishTime               : chr "61373"
+    ##  $ Choice1.OffsetDelay              : chr "-999999"
+    ##  $ Choice1.RTTime                   : chr "61373"
+    ##  $ Choice1.RT                       : chr "2328"
+    ##  $ Choice1.RESP                     : chr "y"
+    ##  $ Choice1.CRESP                    : chr "r"
+    ##  $ FeedbackDisplay6.OnsetDelay      : chr "939"
+    ##  $ FeedbackDisplay6.OnsetTime       : chr "62312"
+    ##  $ FeedbackDisplay6.DurationError   : chr "-939"
+    ##  $ FeedbackDisplay6.Duration        : chr "1672"
+    ##  $ FeedbackDisplay6.StartTime       : chr "62310"
+    ##  $ FeedbackDisplay6.OffsetTime      : chr "62845"
+    ##  $ FeedbackDisplay6.FinishTime      : chr "62845"
+    ##  $ FeedbackDisplay6.OffsetDelay     : chr "0"
+    ##  $ Choice.OnsetDelay                : chr "0"
+    ##  $ Choice.OnsetTime                 : chr "0"
+    ##  $ Choice.DurationError             : chr "0"
+    ##  $ Choice.Duration                  : chr "4000"
+    ##  $ Choice.StartTime                 : chr "0"
+    ##  $ Choice.OffsetTime                : chr "0"
+    ##  $ Choice.FinishTime                : chr "0"
+    ##  $ Choice.TargetOffsetTime          : chr "0"
+    ##  $ Choice.TargetOnsetTime           : chr "0"
+    ##  $ Choice.OffsetDelay               : chr "0"
+    ##  $ Choice.RTTime                    : chr "0"
+    ##  $ Choice.RT                        : chr "0"
+    ##  $ Choice.RESP                      : chr ""
+    ##  $ Choice.CRESP                     : chr ""
+    ##  $ FeedbackDisplay3.OnsetDelay      : chr "0"
+    ##  $ FeedbackDisplay3.OnsetTime       : chr "0"
+    ##  $ FeedbackDisplay3.DurationError   : chr "0"
+    ##  $ FeedbackDisplay3.Duration        : chr "0"
+    ##  $ FeedbackDisplay3.StartTime       : chr "0"
+    ##  $ FeedbackDisplay3.OffsetTime      : chr "0"
+    ##  $ FeedbackDisplay3.FinishTime      : chr "0"
+    ##  $ FeedbackDisplay3.TargetOffsetTime: chr "0"
+    ##  $ FeedbackDisplay3.TargetOnsetTime : chr "0"
+    ##  $ FeedbackDisplay3.OffsetDelay     : chr "0"
+    ##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+    ## 
+    ##  Eprime.Level   Running Procedure
+    ##             2 BlockList BlockProc
+    ## List of 9
+    ##  $ Eprime.Level      : num 2
+    ##  $ Eprime.LevelName  : chr "BlockList_1"
+    ##  $ Eprime.Basename   : chr "RTG1_1ITCscanner1LLA-05200-1"
+    ##  $ Eprime.FrameNumber: chr "52"
+    ##  $ Procedure         : chr "BlockProc"
+    ##  $ Running           : chr "BlockList"
+    ##  $ PracticeMode      : chr "?"
+    ##  $ Cycle             : chr "1"
+    ##  $ Sample            : chr "1"
+    ##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+    ## 
+    ##  Eprime.Level Running Procedure
+    ##             1    <NA>      <NA>
+    ## List of 65
+    ##  $ Eprime.Level            : num 1
+    ##  $ Eprime.LevelName        : logi NA
+    ##  $ Eprime.Basename         : chr "RTG1_1ITCscanner1LLA-05200-1"
+    ##  $ Eprime.FrameNumber      : chr "53"
+    ##  $ Procedure               : logi NA
+    ##  $ Running                 : logi NA
+    ##  $ Experiment              : chr "RTG1_1ITCscanner1LLA"
+    ##  $ SessionDate             : chr "06-10-2011"
+    ##  $ SessionTime             : chr "13:30:30"
+    ##  $ SessionTimeUtc          : chr "5:30:30 PM"
+    ##  $ Subject                 : chr "05200"
+    ##  $ Session                 : chr "1"
+    ##  $ RandomSeed              : chr "1055496015"
+    ##  $ Group                   : chr "1"
+    ##  $ Display.RefreshRate     : chr "60.052"
+    ##  $ Slide2.OnsetDelay       : chr "19"
+    ##  $ Slide2.OnsetTime        : chr "8774"
+    ##  $ Slide2.DurationError    : chr "-999999"
+    ##  $ Slide2.PreRelease       : chr "0"
+    ##  $ Slide2.Duration         : chr "-1"
+    ##  $ Slide2.StartTime        : chr "8755"
+    ##  $ Slide2.OffsetTime       : chr "19995"
+    ##  $ Slide2.FinishTime       : chr "19995"
+    ##  $ Slide2.TimingMode       : chr "0"
+    ##  $ Slide2.CustomOnsetTime  : chr "0"
+    ##  $ Slide2.CustomOffsetTime : chr "0"
+    ##  $ Slide2.ActionDelay      : chr "0"
+    ##  $ Slide2.ActionTime       : chr "8774"
+    ##  $ Slide2.TargetOffsetTime : chr "-1"
+    ##  $ Slide2.TargetOnsetTime  : chr "8755"
+    ##  $ Slide2.OffsetDelay      : chr "-999999"
+    ##  $ Slide2.RTTime           : chr "19995"
+    ##  $ Slide2.ACC              : chr "0"
+    ##  $ Slide2.RT               : chr "11221"
+    ##  $ Slide2.RESP             : chr "n"
+    ##  $ Slide2.CRESP            : chr ""
+    ##  $ Slide1.OnsetTime        : chr "20000"
+    ##  $ Slide1.DurationError    : chr "-999999"
+    ##  $ Slide1.Duration         : chr "-1"
+    ##  $ Slide1.StartTime        : chr "19998"
+    ##  $ Slide1.OffsetTime       : chr "54045"
+    ##  $ Slide1.FinishTime       : chr "54045"
+    ##  $ Slide1.RT               : chr "34045"
+    ##  $ Goodbye.OnsetDelay      : chr "2"
+    ##  $ Goodbye.OnsetTime       : chr "558047"
+    ##  $ Goodbye.DurationError   : chr "0"
+    ##  $ Goodbye.PreRelease      : chr "0"
+    ##  $ Goodbye.Duration        : chr "6000"
+    ##  $ Goodbye.StartTime       : chr "557853"
+    ##  $ Goodbye.OffsetTime      : chr "564047"
+    ##  $ Goodbye.FinishTime      : chr "564047"
+    ##  $ Goodbye.TimingMode      : chr "0"
+    ##  $ Goodbye.CustomOnsetTime : chr "0"
+    ##  $ Goodbye.CustomOffsetTime: chr "0"
+    ##  $ Goodbye.ActionDelay     : chr "1"
+    ##  $ Goodbye.ActionTime      : chr "558048"
+    ##  $ Goodbye.TargetOffsetTime: chr "564047"
+    ##  $ Goodbye.TargetOnsetTime : chr "558045"
+    ##  $ Goodbye.OffsetDelay     : chr "0"
+    ##  $ Goodbye.RTTime          : chr "0"
+    ##  $ Goodbye.ACC             : chr "0"
+    ##  $ Goodbye.RT              : chr "0"
+    ##  $ Goodbye.RESP            : chr ""
+    ##  $ Goodbye.CRESP           : chr ""
+    ##  $ Clock.StartTimeOfDay    : chr "6/10/2011 1:30:30 PM"
+    ##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+    ## NULL
+
+    trial <- filter_in(experiment_data, "Running", "TrialList")
+    block <- filter_in(experiment_data, "Running", "BlockList")
+    slides <- filter_in(experiment_data, "Eprime.Level", 1)
+
+    slides_df <- to_data_frame(slides) %>%
+      readr::type_convert()
+
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## cols(
+    ##   .default = col_double(),
+    ##   Eprime.LevelName = col_character(),
+    ##   Eprime.Basename = col_character(),
+    ##   Procedure = col_character(),
+    ##   Running = col_character(),
+    ##   LevelName = col_character(),
+    ##   Experiment = col_character(),
+    ##   SessionDate = col_character(),
+    ##   SessionTime = col_time(format = ""),
+    ##   SessionTimeUtc = col_time(format = ""),
+    ##   Subject = col_character(),
+    ##   Slide2.RESP = col_character(),
+    ##   Slide2.CRESP = col_logical(),
+    ##   Goodbye.RESP = col_logical(),
+    ##   Goodbye.CRESP = col_logical(),
+    ##   Clock.StartTimeOfDay = col_character()
+    ## )
+    ## ℹ Use `spec()` for the full column specifications.
+
+    trial_df <- to_data_frame(trial) %>%
+      readr::type_convert()
+
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## cols(
+    ##   .default = col_double(),
+    ##   Eprime.LevelName = col_character(),
+    ##   Eprime.Basename = col_character(),
+    ##   Procedure = col_character(),
+    ##   Running = col_character(),
+    ##   Choice1.RESP = col_character(),
+    ##   Choice1.CRESP = col_character(),
+    ##   Choice.RESP = col_character(),
+    ##   Choice.CRESP = col_character()
+    ## )
+    ## ℹ Use `spec()` for the full column specifications.
+
+    head(trial_df)
+
+    ##   Eprime.Level Eprime.LevelName              Eprime.Basename Eprime.FrameNumber
+    ## 1            3      TrialList_1 RTG1_1ITCscanner1LLA-05200-1                  2
+    ## 2            3      TrialList_2 RTG1_1ITCscanner1LLA-05200-1                  3
+    ## 3            3      TrialList_3 RTG1_1ITCscanner1LLA-05200-1                  4
+    ## 4            3      TrialList_4 RTG1_1ITCscanner1LLA-05200-1                  5
+    ## 5            3      TrialList_5 RTG1_1ITCscanner1LLA-05200-1                  6
+    ## 6            3      TrialList_6 RTG1_1ITCscanner1LLA-05200-1                  7
+    ##   Procedure   Running Offer delay NullDuration LeftRight FeedbackDur Cycle
+    ## 1 TrialProc TrialList  23.0    21         5000         0        1672     1
+    ## 2 TrialProc TrialList  28.0     5         5000         1        2328     1
+    ## 3 TrialProc TrialList  30.5    55         5000         1        1984     1
+    ## 4 TrialProc TrialList  39.0    34        17000         1        2440     1
+    ## 5 TrialProc TrialList  25.0     7         8000         0        1736     1
+    ## 6 TrialProc TrialList  22.5    45         2000         1        2584     1
+    ##   Sample nullscreen.OnsetDelay nullscreen.OnsetTime nullscreen.DurationError
+    ## 1      1                   303                54348                     -303
+    ## 2      2                     0                63045                        0
+    ## 3      3                     0                72045                        0
+    ## 4      4                     0                81045                        0
+    ## 5      5                     0               102045                        0
+    ## 6      6                     0               114045                        0
+    ##   nullscreen.StartTime nullscreen.OffsetTime nullscreen.FinishTime
+    ## 1                54047                 58845                 58845
+    ## 2                62853                 67845                 67845
+    ## 3                71854                 76845                 76845
+    ## 4                80853                 97845                 97845
+    ## 5               101854                109845                109845
+    ## 6               113853                115845                115845
+    ##   nullscreen.ActionDelay nullscreen.ActionTime nullscreen.OffsetDelay
+    ## 1                      0                 54348                      0
+    ## 2                      0                 63045                      0
+    ## 3                      0                 72045                      0
+    ## 4                      0                 81045                      0
+    ## 5                      0                102045                      0
+    ## 6                      0                114045                      0
+    ##   Choice1.OnsetDelay Choice1.OnsetTime Choice1.DurationError Choice1.Duration
+    ## 1                  0             59045               -999999             4000
+    ## 2                  0             59045               -999999             4000
+    ## 3                  0             59045               -999999             4000
+    ## 4                  0             59045               -999999             4000
+    ## 5                  0            110045               -999999             4000
+    ## 6                  0            110045               -999999             4000
+    ##   Choice1.StartTime Choice1.OffsetTime Choice1.FinishTime Choice1.OffsetDelay
+    ## 1             58846              61373              61373             -999999
+    ## 2             58846              61373              61373             -999999
+    ## 3             58846              61373              61373             -999999
+    ## 4             58846              61373              61373             -999999
+    ## 5            109846             112309             112309             -999999
+    ## 6            109846             112309             112309             -999999
+    ##   Choice1.RTTime Choice1.RT Choice1.RESP Choice1.CRESP
+    ## 1          61373       2328            y             r
+    ## 2          61373       2328            y             r
+    ## 3          61373       2328            y             r
+    ## 4          61373       2328            y             r
+    ## 5         112309       2264            y             r
+    ## 6         112309       2264            y             r
+    ##   FeedbackDisplay6.OnsetDelay FeedbackDisplay6.OnsetTime
+    ## 1                         939                      62312
+    ## 2                         939                      62312
+    ## 3                         939                      62312
+    ## 4                         939                      62312
+    ## 5                           3                     112312
+    ## 6                           3                     112312
+    ##   FeedbackDisplay6.DurationError FeedbackDisplay6.Duration
+    ## 1                           -939                      1672
+    ## 2                           -939                      1672
+    ## 3                           -939                      1672
+    ## 4                           -939                      1672
+    ## 5                             -3                      1736
+    ## 6                             -3                      1736
+    ##   FeedbackDisplay6.StartTime FeedbackDisplay6.OffsetTime
+    ## 1                      62310                       62845
+    ## 2                      62310                       62845
+    ## 3                      62310                       62845
+    ## 4                      62310                       62845
+    ## 5                     112311                      113845
+    ## 6                     112311                      113845
+    ##   FeedbackDisplay6.FinishTime FeedbackDisplay6.OffsetDelay Choice.OnsetDelay
+    ## 1                       62845                            0                 0
+    ## 2                       62845                            0                 0
+    ## 3                       62845                            0                 0
+    ## 4                       62845                            0                 0
+    ## 5                      113845                            0                 0
+    ## 6                      113845                            0                 0
+    ##   Choice.OnsetTime Choice.DurationError Choice.Duration Choice.StartTime
+    ## 1                0                    0            4000                0
+    ## 2            68045              -999999            4000            67846
+    ## 3            77045              -999999            4000            76846
+    ## 4            98045              -999999            4000            97847
+    ## 5            98045              -999999            4000            97847
+    ## 6           116045              -999999            4000           115846
+    ##   Choice.OffsetTime Choice.FinishTime Choice.TargetOffsetTime
+    ## 1                 0                 0                       0
+    ## 2             69717             69717                   71845
+    ## 3             79061             79061                   80845
+    ## 4             99605             99605                  101845
+    ## 5             99605             99605                  101845
+    ## 6            117461            117461                  119845
+    ##   Choice.TargetOnsetTime Choice.OffsetDelay Choice.RTTime Choice.RT Choice.RESP
+    ## 1                      0                  0             0         0        <NA>
+    ## 2                  68045            -999999         69717      1672           y
+    ## 3                  77045            -999999         79061      2016           r
+    ## 4                  98045            -999999         99605      1560           r
+    ## 5                  98045            -999999         99605      1560           r
+    ## 6                 116045            -999999        117461      1416           r
+    ##   Choice.CRESP FeedbackDisplay3.OnsetDelay FeedbackDisplay3.OnsetTime
+    ## 1         <NA>                           0                          0
+    ## 2            r                           3                      69720
+    ## 3            r                           3                      79064
+    ## 4            r                           3                      99608
+    ## 5            r                           3                      99608
+    ## 6            r                           3                     117464
+    ##   FeedbackDisplay3.DurationError FeedbackDisplay3.Duration
+    ## 1                              0                         0
+    ## 2                             -3                      2328
+    ## 3                             -3                      1984
+    ## 4                             -3                      2440
+    ## 5                             -3                      2440
+    ## 6                             -3                      2584
+    ##   FeedbackDisplay3.StartTime FeedbackDisplay3.OffsetTime
+    ## 1                          0                           0
+    ## 2                      69719                       71845
+    ## 3                      79063                       80845
+    ## 4                      99607                      101845
+    ## 5                      99607                      101845
+    ## 6                     117463                      119845
+    ##   FeedbackDisplay3.FinishTime FeedbackDisplay3.TargetOffsetTime
+    ## 1                           0                                 0
+    ## 2                       71845                             71845
+    ## 3                       80845                             80845
+    ## 4                      101845                            101845
+    ## 5                      101845                            101845
+    ## 6                      119845                            119845
+    ##   FeedbackDisplay3.TargetOnsetTime FeedbackDisplay3.OffsetDelay
+    ## 1                                0                            0
+    ## 2                            69717                            0
+    ## 3                            79061                            0
+    ## 4                            99605                            0
+    ## 5                            99605                            0
+    ## 6                           117461                            0
+
+Each line of this table indicates an event (trial) happening in the
+experiment. In an ITC task, participants are shown a value of money and
+a delay. They’re asked, “would you rather receive $20 now, or wait X
+number of days to receive $Y later?” Hence, each line is an offer in
+this paradigm.
+
+Processing
+==========
+
+We want to get this into BIDS standard. Here’s the proposed columns:
+
+#### Mandatory in BIDS:
+
+`onset`: time that the trial happened from the start of the scan
+
+`duration`: how long that event happened for
+
+#### Required for ITC
+
+`choice`: did they choose the delayed offer or not
+
+`button_press`: did they go left or right
+
+`amount`: how much they were offered
+
+`delay`: what was the delay on the offer
+
+`reaction time`: how long did they take to make their decision
+
+Data Wrangling
+--------------
+
+The first thing we need to define is what choice they made. The column
+`LeftRight` indicates whether the instant $20 option is on the left or
+right of the screen. If `LeftRight == 1`, the delayed option was
+presented on the left.
+
+We’ll code this as a factor `delay_position` with two levels, 1 to
+indicate it was on the right, and 0 to indicate it was on the left:
+
+    trial_df_proc <- trial_df %>%
+      select(-contains("null"), -contains("Eprime"), -contains("Feedback")) %>%
+      mutate(delay_position = ifelse(LeftRight == 0, 1, 0))
+
+Next, we define which button they pressed, left (0) or right (1):
+
+We’ll also define the motor response they made, `button_press`, as
+either 1 (right) or 0 (left). We use `CHOICE.RESP` and `CHOICE1.RESP` as
+the indicator of which side they picked. If the delayed option was on
+the left, use `CHOICE.RESP`; `r` is right, `y` is left.
+
+Then, we encode the `choice` as either `1=delayed` (the delayed position
+and the chosen button press where the same) or `0=now` (the delayed
+position and the chosen button press where different):
+
+    trial_df_proc <- trial_df_proc %>%
+      mutate(
+        button_press = case_when(
+          
+          LeftRight == 1 & Choice.RESP == "y" ~ 0,
+          LeftRight == 1 & Choice.RESP == "r" ~ 1,
+          LeftRight == 0 & Choice1.RESP == "y" ~ 0,
+          LeftRight == 0 & Choice1.RESP == "r" ~ 1
+          
+        ),
+        choice = case_when(
+          
+          LeftRight == 1 & Choice.RESP == "y" ~ 1,
+          LeftRight == 1 & Choice.RESP == "r" ~ 0,
+          LeftRight == 0 & Choice1.RESP == "y" ~ 0,
+          LeftRight == 0 & Choice1.RESP == "r" ~ 1
+          
+          )
+        )
+
+We also include the amount and delay:
+
+    trial_df_proc <- trial_df_proc %>%
+      rename(offer = Offer) %>%
+      select(offer, delay, choice, button_press, delay_position, everything())
+
+The duration of the trial is uniform at 4000ms. There are two columns
+for event timings: `Choice1.OnsetTime` and `Choice.OnsetTime`. If
+`LeftRight==1` the task proceeds to Choice.\*. If they clicked right,
+the time for this gets recorded in `Choice.OnsetTime`, and the value in
+`Choice1.OnsetTime` is duplicated from the previous row:
+
+    10            216687           222699      ## left
+    11            228727           222699      ## left
+    12            246744           222699      ## right
+    13            246744           264762      ## right
+    14            246744           270774      ## right
+
+Here we use the `duplicated` function to tell us if a value in a vector
+is a duplicate of itself. If there’s a duplicate, take the value from
+the opposite column:
+
+    trial_df_proc <- trial_df_proc %>%
+      mutate(
+        onset = case_when(
+           
+          # the first row should both not be duplicates
+          !duplicated(Choice.OnsetTime) & !duplicated(Choice1.OnsetTime) ~ 0,
+          
+          # if any value in Choice is a duplicate, choose the value from Choice1
+          duplicated(Choice.OnsetTime) ~ Choice1.OnsetTime,
+          
+          # vice versa
+          duplicated(Choice1.OnsetTime) ~ Choice.OnsetTime
+        ),
+        
+        duration = 4000,
+        
+      ) %>%
+      select(onset, duration, everything())
+
+We can do the same for response time:
+
+    trial_df_proc <- trial_df_proc %>%
+      mutate(
+        row_num = row_number(),
+        response_time = case_when(
+           
+          # the first row should be the one that's not zero
+          row_num == 1 & Choice.RT == 0 ~ Choice1.RT,
+          row_num == 1 & Choice1.RT == 0 ~ Choice.RT,
+          
+          # if any value in Choice is a duplicate, choose the value from Choice1
+          duplicated(Choice.RT) ~ Choice1.RT,
+          
+          # vice versa
+          duplicated(Choice1.RT) ~ Choice.RT
+        )
+      ) %>%
+      select(onset, duration, response_time, everything(), -row_num)
+
+Lastly, we have to account for the timepoint that the task began (as
+opposed to when the participant is reading instructions). This is given
+in the `slides_df`:
+
+    trial_df_proc <- trial_df_proc %>%
+      mutate(onset = ifelse(onset == 0, onset, onset - slides_df$Slide1.OffsetTime[2]))
+
+Here’s the data head so far:
+
+    trial_df_sv <- trial_df_proc %>%
+      select(onset:delay_position) %>%
+      mutate(IA = 20)
+    trial_df_sv %>%
+      head()
+
+    ##   onset duration response_time offer delay choice button_press delay_position
+    ## 1     0     4000          2328  23.0    21      0            0              1
+    ## 2 14000     4000          1672  28.0     5      1            0              0
+    ## 3 23000     4000          2016  30.5    55      0            1              0
+    ## 4 44000     4000          1560  39.0    34      0            1              0
+    ## 5 56000     4000          2264  25.0     7      0            0              1
+    ## 6 62000     4000          1416  22.5    45      0            1              0
+    ##   IA
+    ## 1 20
+    ## 2 20
+    ## 3 20
+    ## 4 20
+    ## 5 20
+    ## 6 20
+
+From here, we write this data frame to a file.
+
+    trial_df_sv %>% 
+      write_delim("/cbica/projects/wolf_satterthwaite_reward/Curation/code/itc_eprime/matlab_code/data/demo_trial.txt", delim = "\t")
+
+Subjective Value
+================
+
+We calculate the `k` parameter for ITC using a pre-compiled matlab
+script:
+
+    function []=kable_itc_wrapper(inputfile, outputfile)
+
+    m = readtable(inputfile);
+    type='h';
+
+    choice = m.('choice');
+    IA = m.('IA');
+    DA = m.('offer');
+    D = m.('delay');
+
+    out = KableLab_ITC(type,choice,IA,DA,D);
+    k_param=out.k;
+    Tout = table(k_param);
+    writetable(Tout,outputfile);
+    disp(k_param);
+
+    end
+
+    % ------------------------------------- %
+    % kable lab ITC code starts here
+    % ------------------------------------- %
+    function out = KableLab_ITC(type,choice,IA,DA,D)
+    % data quality control by checking missed trials.
+    if sum(choice ~= 0 & choice ~= 1) ~= 0
+        error('choice input has non binary elements')
+    end
+    if sum(choice) == length(choice) || sum(choice) == 0
+        error('choices are all one-sided')
+    end
+
+    % type specifies the type of discounting function
+    if strcmp(type,'e') || strcmp(type,'h')
+        out = fitoneparam(type,choice,IA,DA,D);
+    %elseif strcmp(type,'g')
+    %    out = fitgen(choice,IA,DA,D);
+    %elseif strcmp(type,'q')
+    %    out = fitquasi(choice,IA,DA,D);
+    else
+        error('unknown discounting function type')
+    end
+    out.type = type;
+    [~,dev] = mnrfit([],2-choice); % an intercept-only model
+    out.LL0 = -dev/2; % LL of a null model
+    out.r2 = 1 - out.LL/out.LL0; % McFadden's R-squared
+    out.DV = out.SVlater-IA; % Decision Variable
+    predictedChoice = out.DV>=0;
+    out.percentPredicted = sum(predictedChoice == choice) / length(choice) * 100;
+    out.choicep = 1 ./ (1 + exp(-(out.noise.*out.DV)));
+    out.choiceresid = out.choicep-choice;
+    out.rawresid = out.DV-round(max(abs(out.DV))).*(2.*choice-1);
+    end
+
+    function out = fitoneparam(type,choice,IA,DA,D)
+    if strcmp(type,'e') % exponential case
+        indiffk = -log(IA./DA)./D;
+    else % hyperbolic case
+        indiffk = (DA-IA)./(IA.*D);
+    end
+    mink = min(indiffk)*(0.99);
+    maxk = max(indiffk)*(1.01);
+    [noise,ks] = meshgrid([-1,0,1], linspace(log(mink),log(maxk),5)); % search grid. We search in logspace
+    b = [noise(:) ks(:)];
+    info.negLL = inf;
+    for i = 1:length(b)
+        [new.b,new.negLL] = fmincon(@negLL,b(i,:),[],[],[],[],[log(eps),log(mink)],[2,log(maxk)],[],...
+            optimset('Algorithm','interior-point','Display','off'),choice,IA,DA,D,type);
+        if new.negLL < info.negLL
+            info = new;
+        end
+    end
+    out.k = exp(info.b(2));
+    out.noise = exp(info.b(1));
+    out.LL = -info.negLL;
+    if strcmp(type,'e')
+        out.SVlater = DA.*exp(-out.k.*D);
+    else
+        out.SVlater = DA./(1+out.k.*D);
+    end
+    end
+
+    function negLL = negLL(beta,choice,IA,DA,D,type) % function for negative Log-Likelihood
+    switch type
+        case 'e'
+            SVdelayed = DA.*exp(-exp(beta(2)).*D);
+        case 'h'
+            SVdelayed = DA./(1+exp(beta(2)).*D);
+        case 'q'
+            SVdelayed = exp(log(DA)+log(beta(2))+D.*log(beta(3)));
+            beta(1) = log(beta(1));
+        case 'g'
+            SVdelayed = DA./((1+exp(beta(2)).*D).^beta(3));
+            beta(1) = log(beta(1));
+    end
+    reg = exp(beta(1)).*(SVdelayed-IA);
+    p = 1 ./ (1 + exp(-reg));
+    p(p == 1) = 1-eps;
+    p(p == 0) = eps;
+    negLL = -sum((choice==1).*log(p) + (choice==0).*log(1-p));
+    end
+
+Here’s how it’s called:
+
+    ./run_kable_itc_wrapper.sh $MATLAB_DIR data/demo_trial.txt data/output_trial.txt
+
+And read it in:
+
+    k_param <- read_table("/cbica/projects/wolf_satterthwaite_reward/Curation/code/itc_eprime/matlab_code/data/output_trial.txt") %>%
+      pull(k_param)
+
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## cols(
+    ##   k_param = col_double()
+    ## )
+
+    k_param
+
+    ## [1] 0.07106205
+
+Finally, subjective value is calculated by <span
+class="math inline">\\(\\frac{\\text{offer}} {1 + k \\times
+\\text{delay}}\\)</span>
+
+    final_df <- trial_df_sv %>%
+      mutate(subjective_value = offer / (1 + k_param * delay)) %>%
+      mutate_if(~ is.numeric(.) && all(unique(.) %in% c(0, 1, NA)), factor) %>%
+      select(-IA) 
+
+Final Outputs
+=============
+
+Here’s the final dataframe:
+
+    final_df
+
+    ##     onset duration response_time offer delay choice button_press delay_position
+    ## 1       0     4000          2328  23.0    21      0            0              1
+    ## 2   14000     4000          1672  28.0     5      1            0              0
+    ## 3   23000     4000          2016  30.5    55      0            1              0
+    ## 4   44000     4000          1560  39.0    34      0            1              0
+    ## 5   56000     4000          2264  25.0     7      0            0              1
+    ## 6   62000     4000          1416  22.5    45      0            1              0
+    ## 7   68000     4000          1344  37.5   149      0            1              0
+    ## 8   83000     4000          1200  40.5    97      0            1              0
+    ## 9   95000     4000          1656  31.5    68      0            0              1
+    ## 10 101000     4000          1168  46.5    48      0            1              0
+    ## 11 107000     4000          1544  31.5    48      0            0              1
+    ## 12 125000     4000          1536  27.5    53      0            0              1
+    ## 13 143000     4000          1224  43.0   161      0            1              0
+    ## 14 149000     4000          1536  48.0   107      0            1              0
+    ## 15 161000     4000          3464  41.5    15      1            1              1
+    ## 16 170000     4000          1248  39.0    48      0            0              1
+    ## 17 185000     4000          1048  25.5   149      0            1              0
+    ## 18 191000     4000          1344  20.5    84      0            0              1
+    ## 19 197000     4000          1352  38.0   178      0            0              1
+    ## 20 203000     4000          3168  31.5     7      0            0              1
+    ## 21 209000     4000          1072  25.5    84      0            1              0
+    ## 22 215000     4000          1312  34.0     7      1            1              1
+    ## 23 221000     4000          1272  20.5   161      0            0              1
+    ## 24 233000     4000          1696  41.5     7      1            0              0
+    ## 25 254000     4000           928  28.0    48      0            1              0
+    ## 26 263000     4000          1216  29.0     4      1            1              1
+    ## 27 269000     4000          1128  33.0    55      0            1              0
+    ## 28 278000     4000          1048  47.5    43      0            0              1
+    ## 29 290000     4000          1112  33.0   107      0            0              1
+    ## 30 296000     4000           824  22.5   178      0            1              0
+    ## 31 302000     4000          1016  50.0   124      0            1              0
+    ## 32 308000     4000          1192  30.0    34      0            0              1
+    ## 33 317000     4000          1424  26.5     7      0            1              0
+    ## 34 341000     4000          1032  25.5   124      0            1              0
+    ## 35 347000     4000           880  39.0   124      0            1              0
+    ## 36 356000     4000          1136  25.5   107      0            0              1
+    ## 37 365000     4000          1456  36.5    32      0            1              0
+    ## 38 371000     4000          1128  41.5   178      0            0              1
+    ## 39 380000     4000           760  45.0   149      0            1              0
+    ## 40 386000     4000          1096  44.0   124      0            0              1
+    ## 41 395000     4000          1336  29.0    68      0            0              1
+    ## 42 410000     4000          1488  29.0    17      0            0              1
+    ## 43 419000     4000          2328  26.5    29      0            0              1
+    ## 44 431000     4000          1256  48.0    23      0            0              1
+    ## 45 449000     4000          1368  30.5    97      0            0              1
+    ## 46 455000     4000          1272  44.0    34      0            1              0
+    ## 47 470000     4000           912  47.5    84      0            1              0
+    ## 48 482000     4000          1328  48.0    34      0            1              0
+    ## 49 491000     4000          1136  22.5   124      0            0              1
+    ## 50 500000     4000          1136  28.0   124      0            1              0
+    ##    subjective_value
+    ## 1          9.228413
+    ## 2         20.659477
+    ## 3          6.213822
+    ## 4         11.416496
+    ## 5         16.695223
+    ## 6          5.359961
+    ## 7          3.236038
+    ## 8          5.131117
+    ## 9          5.401032
+    ## 10        10.541879
+    ## 11         7.141273
+    ## 12         5.769689
+    ## 13         3.456317
+    ## 14         5.579035
+    ## 15        20.087799
+    ## 16         8.841576
+    ## 17         2.200506
+    ## 18         2.941509
+    ## 19         2.784078
+    ## 20        21.035981
+    ## 21         3.658950
+    ## 22        22.705503
+    ## 23         1.647779
+    ## 24        27.714070
+    ## 25         6.347798
+    ## 26        22.581305
+    ## 27         6.723151
+    ## 28        11.712004
+    ## 29         3.835586
+    ## 30         1.648467
+    ## 31         5.095960
+    ## 32         8.781920
+    ## 33        17.696936
+    ## 34         2.598940
+    ## 35         3.974849
+    ## 36         2.963862
+    ## 37        11.148492
+    ## 38         3.040506
+    ## 39         3.883246
+    ## 40         4.484445
+    ## 41         4.972378
+    ## 42        13.133732
+    ## 43         8.657869
+    ## 44        18.220280
+    ## 45         3.864174
+    ## 46        12.880149
+    ## 47         6.815692
+    ## 48        14.051072
+    ## 49         2.293182
+    ## 50         2.853738
+
+We pair this with a dictionary in BIDS describing how to interpret these
+columns, like:
+
+    {
+        "column": {
+            "LongName": "some name",
+            "Description": "long description",
+            "Levels": {
+                "go": "level one of a factor",
+                "stop": "leve two of a factor",
+            }
+        }
+    }
+
+    dictionary <- final_df %>%
+      select(-onset, -duration) %>%
+      map(~ list(
+        LongName = "",
+        Description = ""
+      ))
+      
+    dictionary$response_time$LongName <- "Response Time to Offer"
+    dictionary$response_time$Description <- "How long it takes for the participant to choose and respond with a button press"
+
+    dictionary$offer$LongName <- "Offer Amount"
+    dictionary$offer$Description <- "Amount of money in dollars that the trial is offering"
+
+    dictionary$delay$LongName <- "Delay on Offer"
+    dictionary$delay$Description <- "Number of days to wait until they can receive the offer"
+
+    dictionary$choice$LongName <- "Choice made by the participant"
+    dictionary$choice$Description <- "Factor indicating whether the participant selected an offer of 20 dollars immediately, or an offer of more value at the delayed time"
+    dictionary$choice$Levels <- list(`1` = "Selected the delayed offer",
+                                     `0` = "Selected the immediate offer")
+
+    dictionary$button_press$LongName <- "Which button was pressed"
+    dictionary$button_press$Description <- "Factor indicating whether the participant pressed the button on the right or the left"
+    dictionary$button_press$Levels <- list(`1` = "Pressed the right hand button",
+                                     `0` = "Pressed the left hand button")
+
+    dictionary$delay_position$LongName <- "Position of the delayed option"
+    dictionary$delay_position$Description <- "Factor indicating which side of the screen the delayed option is on for the trial"
+    dictionary$delay_position$Levels <- list(`1` = "Delay on the right",
+                                     `0` = "Delay on the left")
+
+    dictionary$subjective_value$LongName <- "Subjective value of potential offer"
+    dictionary$subjective_value$Description <- "Participant's subjective value of the delayed offer calculated using a discount curve (as is common in the literature)" # should add paper link in here
+
+    jsonlite::toJSON(dictionary) %>%
+      jsonlite::prettify()
+
+    ## {
+    ##     "response_time": {
+    ##         "LongName": [
+    ##             "Response Time to Offer"
+    ##         ],
+    ##         "Description": [
+    ##             "How long it takes for the participant to choose and respond with a button press"
+    ##         ]
+    ##     },
+    ##     "offer": {
+    ##         "LongName": [
+    ##             "Offer Amount"
+    ##         ],
+    ##         "Description": [
+    ##             "Amount of money in dollars that the trial is offering"
+    ##         ]
+    ##     },
+    ##     "delay": {
+    ##         "LongName": [
+    ##             "Delay on Offer"
+    ##         ],
+    ##         "Description": [
+    ##             "Number of days to wait until they can receive the offer"
+    ##         ]
+    ##     },
+    ##     "choice": {
+    ##         "LongName": [
+    ##             "Choice made by the participant"
+    ##         ],
+    ##         "Description": [
+    ##             "Factor indicating whether the participant selected an offer of 20 dollars immediately, or an offer of more value at the delayed time"
+    ##         ],
+    ##         "Levels": {
+    ##             "1": [
+    ##                 "Selected the delayed offer"
+    ##             ],
+    ##             "0": [
+    ##                 "Selected the immediate offer"
+    ##             ]
+    ##         }
+    ##     },
+    ##     "button_press": {
+    ##         "LongName": [
+    ##             "Which button was pressed"
+    ##         ],
+    ##         "Description": [
+    ##             "Factor indicating whether the participant pressed the button on the right or the left"
+    ##         ],
+    ##         "Levels": {
+    ##             "1": [
+    ##                 "Pressed the right hand button"
+    ##             ],
+    ##             "0": [
+    ##                 "Pressed the left hand button"
+    ##             ]
+    ##         }
+    ##     },
+    ##     "delay_position": {
+    ##         "LongName": [
+    ##             "Position of the delayed option"
+    ##         ],
+    ##         "Description": [
+    ##             "Factor indicating which side of the screen the delayed option is on for the trial"
+    ##         ],
+    ##         "Levels": {
+    ##             "1": [
+    ##                 "Delay on the right"
+    ##             ],
+    ##             "0": [
+    ##                 "Delay on the left"
+    ##             ]
+    ##         }
+    ##     },
+    ##     "subjective_value": {
+    ##         "LongName": [
+    ##             "Subjective value of potential offer"
+    ##         ],
+    ##         "Description": [
+    ##             "Participant's subjective value of the delayed offer calculated using a discount curve (as is common in the literature)"
+    ##         ]
+    ##     }
+    ## }
+    ## 

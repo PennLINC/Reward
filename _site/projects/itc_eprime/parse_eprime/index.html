@@ -1,0 +1,823 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="shortcut icon" href="/Reward/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/Reward/assets/css/just-the-docs-default.css"> <script type="text/javascript" src="/Reward/assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="/Reward/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><title>Parsing EPrime Files | Reward Project Documentation</title><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Parsing EPrime Files" /><meta property="og:locale" content="en_US" /><meta name="description" content="Documentation of Reward Data Processing and Analysis" /><meta property="og:description" content="Documentation of Reward Data Processing and Analysis" /><link rel="canonical" href="http://localhost:4000/Reward/projects/itc_eprime/parse_eprime/" /><meta property="og:url" content="http://localhost:4000/Reward/projects/itc_eprime/parse_eprime/" /><meta property="og:site_name" content="Reward Project Documentation" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Parsing EPrime Files" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"Documentation of Reward Data Processing and Analysis","headline":"Parsing EPrime Files","url":"http://localhost:4000/Reward/projects/itc_eprime/parse_eprime/"}</script><body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg><div class="side-bar"><div class="site-header"> <a href="http://localhost:4000/Reward/" class="site-title lh-tight"> Reward Project Documentation </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a></div><nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="http://localhost:4000/Reward/" class="nav-list-link">Home</a><li class="nav-list-item"><a href="http://localhost:4000/Reward/anna/" class="nav-list-link">Legacy Curation (2018-2020)</a><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/neff/neff_index/" class="nav-list-link">NEFF V1 & V2</a><ul class="nav-list "></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/fndm1/fndm1_index/" class="nav-list-link">FNDM1</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/fndm1/datanarrative/" class="nav-list-link">Data Narrative</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/fndm2/fndm2_index/" class="nav-list-link">FNDM2</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/fndm2/datanarrative/" class="nav-list-link">Data Narrative</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/nodra/nodra_index/" class="nav-list-link">Nodra</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/nodra/datanarrative/" class="nav-list-link">Data Narrative</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/day2/day2_index/" class="nav-list-link">Day2</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/day2/datanarrative/" class="nav-list-link">Data Narrative</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/cogtrain/cogtrain_index/" class="nav-list-link">CogTrain</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/cogtrain/datanarrative/" class="nav-list-link">Data Narrative</a><li class="nav-list-item "><a href="http://localhost:4000/Reward/projects/cogtrain/itc_task_events/" class="nav-list-link">ITC Task Events</a></ul><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/Reward/projects/itc_eprime/itc_eprime/" class="nav-list-link">E-Prime</a><ul class="nav-list "><li class="nav-list-item active"><a href="http://localhost:4000/Reward/projects/itc_eprime/parse_eprime/" class="nav-list-link active">Parsing EPrime Files</a></ul></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Reward Project Documentation" aria-label="Search Reward Project Documentation" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><nav aria-label="Auxiliary" class="aux-nav"><ul class="aux-nav-list"><li class="aux-nav-list-item"> <a href="//github.com/PennLINC/Reward" class="site-button" > Edit on GitHub </a></ul></nav></div><div id="main-content-wrap" class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/Reward/projects/itc_eprime/itc_eprime/">E-Prime</a><li class="breadcrumb-nav-list-item"><span>Parsing EPrime Files</span></ol></nav><div id="main-content" class="main-content" role="main"><p>This notebook parses the eprime files into BIDS valid events TSVs.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (!require("pacman")) install.packages("pacman")
+
+## Loading required package: pacman
+
+pacman::p_load(rprime, dplyr, tidyverse, rjson)
+</code></pre></div></div><p>Let’s start with an example:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rp &lt;- read_eprime("~/dropbox/rawbx/RTG1_1ITCscanner1LLA-05200-1.txt")
+
+experiment_data &lt;- FrameList(rp)
+message("Structure of eprime:")
+
+## Structure of eprime:
+
+print(preview_frames(experiment_data))
+
+## 
+##  Eprime.Level Running Procedure
+##             1  Header    Header
+## List of 17
+##  $ Eprime.Level       : num 1
+##  $ Eprime.LevelName   : chr "Header_"
+##  $ Eprime.Basename    : chr "RTG1_1ITCscanner1LLA-05200-1"
+##  $ Eprime.FrameNumber : chr "1"
+##  $ Procedure          : chr "Header"
+##  $ Running            : chr "Header"
+##  $ VersionPersist     : chr "1"
+##  $ LevelName          : chr "LogLevel10"
+##  $ Experiment         : chr "RTG1_1ITCscanner1LLA"
+##  $ SessionDate        : chr "06-10-2011"
+##  $ SessionTime        : chr "13:30:30"
+##  $ SessionTimeUtc     : chr "5:30:30 PM"
+##  $ Subject            : chr "05200"
+##  $ Session            : chr "1"
+##  $ RandomSeed         : chr "1055496015"
+##  $ Group              : chr "1"
+##  $ Display.RefreshRate: chr "60.052"
+##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+## 
+##  Eprime.Level   Running Procedure
+##             3 TrialList TrialProc
+## List of 66
+##  $ Eprime.Level                     : num 3
+##  $ Eprime.LevelName                 : chr "TrialList_1"
+##  $ Eprime.Basename                  : chr "RTG1_1ITCscanner1LLA-05200-1"
+##  $ Eprime.FrameNumber               : chr "2"
+##  $ Procedure                        : chr "TrialProc"
+##  $ Running                          : chr "TrialList"
+##  $ Offer                            : chr "23"
+##  $ delay                            : chr "21"
+##  $ NullDuration                     : chr "5000"
+##  $ LeftRight                        : chr "0"
+##  $ FeedbackDur                      : chr "1672"
+##  $ Cycle                            : chr "1"
+##  $ Sample                           : chr "1"
+##  $ nullscreen.OnsetDelay            : chr "303"
+##  $ nullscreen.OnsetTime             : chr "54348"
+##  $ nullscreen.DurationError         : chr "-303"
+##  $ nullscreen.StartTime             : chr "54047"
+##  $ nullscreen.OffsetTime            : chr "58845"
+##  $ nullscreen.FinishTime            : chr "58845"
+##  $ nullscreen.ActionDelay           : chr "0"
+##  $ nullscreen.ActionTime            : chr "54348"
+##  $ nullscreen.OffsetDelay           : chr "0"
+##  $ Choice1.OnsetDelay               : chr "0"
+##  $ Choice1.OnsetTime                : chr "59045"
+##  $ Choice1.DurationError            : chr "-999999"
+##  $ Choice1.Duration                 : chr "4000"
+##  $ Choice1.StartTime                : chr "58846"
+##  $ Choice1.OffsetTime               : chr "61373"
+##  $ Choice1.FinishTime               : chr "61373"
+##  $ Choice1.OffsetDelay              : chr "-999999"
+##  $ Choice1.RTTime                   : chr "61373"
+##  $ Choice1.RT                       : chr "2328"
+##  $ Choice1.RESP                     : chr "y"
+##  $ Choice1.CRESP                    : chr "r"
+##  $ FeedbackDisplay6.OnsetDelay      : chr "939"
+##  $ FeedbackDisplay6.OnsetTime       : chr "62312"
+##  $ FeedbackDisplay6.DurationError   : chr "-939"
+##  $ FeedbackDisplay6.Duration        : chr "1672"
+##  $ FeedbackDisplay6.StartTime       : chr "62310"
+##  $ FeedbackDisplay6.OffsetTime      : chr "62845"
+##  $ FeedbackDisplay6.FinishTime      : chr "62845"
+##  $ FeedbackDisplay6.OffsetDelay     : chr "0"
+##  $ Choice.OnsetDelay                : chr "0"
+##  $ Choice.OnsetTime                 : chr "0"
+##  $ Choice.DurationError             : chr "0"
+##  $ Choice.Duration                  : chr "4000"
+##  $ Choice.StartTime                 : chr "0"
+##  $ Choice.OffsetTime                : chr "0"
+##  $ Choice.FinishTime                : chr "0"
+##  $ Choice.TargetOffsetTime          : chr "0"
+##  $ Choice.TargetOnsetTime           : chr "0"
+##  $ Choice.OffsetDelay               : chr "0"
+##  $ Choice.RTTime                    : chr "0"
+##  $ Choice.RT                        : chr "0"
+##  $ Choice.RESP                      : chr ""
+##  $ Choice.CRESP                     : chr ""
+##  $ FeedbackDisplay3.OnsetDelay      : chr "0"
+##  $ FeedbackDisplay3.OnsetTime       : chr "0"
+##  $ FeedbackDisplay3.DurationError   : chr "0"
+##  $ FeedbackDisplay3.Duration        : chr "0"
+##  $ FeedbackDisplay3.StartTime       : chr "0"
+##  $ FeedbackDisplay3.OffsetTime      : chr "0"
+##  $ FeedbackDisplay3.FinishTime      : chr "0"
+##  $ FeedbackDisplay3.TargetOffsetTime: chr "0"
+##  $ FeedbackDisplay3.TargetOnsetTime : chr "0"
+##  $ FeedbackDisplay3.OffsetDelay     : chr "0"
+##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+## 
+##  Eprime.Level   Running Procedure
+##             2 BlockList BlockProc
+## List of 9
+##  $ Eprime.Level      : num 2
+##  $ Eprime.LevelName  : chr "BlockList_1"
+##  $ Eprime.Basename   : chr "RTG1_1ITCscanner1LLA-05200-1"
+##  $ Eprime.FrameNumber: chr "52"
+##  $ Procedure         : chr "BlockProc"
+##  $ Running           : chr "BlockList"
+##  $ PracticeMode      : chr "?"
+##  $ Cycle             : chr "1"
+##  $ Sample            : chr "1"
+##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+## 
+##  Eprime.Level Running Procedure
+##             1    &lt;NA&gt;      &lt;NA&gt;
+## List of 65
+##  $ Eprime.Level            : num 1
+##  $ Eprime.LevelName        : logi NA
+##  $ Eprime.Basename         : chr "RTG1_1ITCscanner1LLA-05200-1"
+##  $ Eprime.FrameNumber      : chr "53"
+##  $ Procedure               : logi NA
+##  $ Running                 : logi NA
+##  $ Experiment              : chr "RTG1_1ITCscanner1LLA"
+##  $ SessionDate             : chr "06-10-2011"
+##  $ SessionTime             : chr "13:30:30"
+##  $ SessionTimeUtc          : chr "5:30:30 PM"
+##  $ Subject                 : chr "05200"
+##  $ Session                 : chr "1"
+##  $ RandomSeed              : chr "1055496015"
+##  $ Group                   : chr "1"
+##  $ Display.RefreshRate     : chr "60.052"
+##  $ Slide2.OnsetDelay       : chr "19"
+##  $ Slide2.OnsetTime        : chr "8774"
+##  $ Slide2.DurationError    : chr "-999999"
+##  $ Slide2.PreRelease       : chr "0"
+##  $ Slide2.Duration         : chr "-1"
+##  $ Slide2.StartTime        : chr "8755"
+##  $ Slide2.OffsetTime       : chr "19995"
+##  $ Slide2.FinishTime       : chr "19995"
+##  $ Slide2.TimingMode       : chr "0"
+##  $ Slide2.CustomOnsetTime  : chr "0"
+##  $ Slide2.CustomOffsetTime : chr "0"
+##  $ Slide2.ActionDelay      : chr "0"
+##  $ Slide2.ActionTime       : chr "8774"
+##  $ Slide2.TargetOffsetTime : chr "-1"
+##  $ Slide2.TargetOnsetTime  : chr "8755"
+##  $ Slide2.OffsetDelay      : chr "-999999"
+##  $ Slide2.RTTime           : chr "19995"
+##  $ Slide2.ACC              : chr "0"
+##  $ Slide2.RT               : chr "11221"
+##  $ Slide2.RESP             : chr "n"
+##  $ Slide2.CRESP            : chr ""
+##  $ Slide1.OnsetTime        : chr "20000"
+##  $ Slide1.DurationError    : chr "-999999"
+##  $ Slide1.Duration         : chr "-1"
+##  $ Slide1.StartTime        : chr "19998"
+##  $ Slide1.OffsetTime       : chr "54045"
+##  $ Slide1.FinishTime       : chr "54045"
+##  $ Slide1.RT               : chr "34045"
+##  $ Goodbye.OnsetDelay      : chr "2"
+##  $ Goodbye.OnsetTime       : chr "558047"
+##  $ Goodbye.DurationError   : chr "0"
+##  $ Goodbye.PreRelease      : chr "0"
+##  $ Goodbye.Duration        : chr "6000"
+##  $ Goodbye.StartTime       : chr "557853"
+##  $ Goodbye.OffsetTime      : chr "564047"
+##  $ Goodbye.FinishTime      : chr "564047"
+##  $ Goodbye.TimingMode      : chr "0"
+##  $ Goodbye.CustomOnsetTime : chr "0"
+##  $ Goodbye.CustomOffsetTime: chr "0"
+##  $ Goodbye.ActionDelay     : chr "1"
+##  $ Goodbye.ActionTime      : chr "558048"
+##  $ Goodbye.TargetOffsetTime: chr "564047"
+##  $ Goodbye.TargetOnsetTime : chr "558045"
+##  $ Goodbye.OffsetDelay     : chr "0"
+##  $ Goodbye.RTTime          : chr "0"
+##  $ Goodbye.ACC             : chr "0"
+##  $ Goodbye.RT              : chr "0"
+##  $ Goodbye.RESP            : chr ""
+##  $ Goodbye.CRESP           : chr ""
+##  $ Clock.StartTimeOfDay    : chr "6/10/2011 1:30:30 PM"
+##  - attr(*, "class")= chr [1:2] "EprimeFrame" "list"
+## NULL
+
+trial &lt;- filter_in(experiment_data, "Running", "TrialList")
+block &lt;- filter_in(experiment_data, "Running", "BlockList")
+slides &lt;- filter_in(experiment_data, "Eprime.Level", 1)
+
+slides_df &lt;- to_data_frame(slides) %&gt;%
+  readr::type_convert()
+
+## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   Eprime.LevelName = col_character(),
+##   Eprime.Basename = col_character(),
+##   Procedure = col_character(),
+##   Running = col_character(),
+##   LevelName = col_character(),
+##   Experiment = col_character(),
+##   SessionDate = col_character(),
+##   SessionTime = col_time(format = ""),
+##   SessionTimeUtc = col_time(format = ""),
+##   Subject = col_character(),
+##   Slide2.RESP = col_character(),
+##   Slide2.CRESP = col_logical(),
+##   Goodbye.RESP = col_logical(),
+##   Goodbye.CRESP = col_logical(),
+##   Clock.StartTimeOfDay = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.
+
+trial_df &lt;- to_data_frame(trial) %&gt;%
+  readr::type_convert()
+
+## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   Eprime.LevelName = col_character(),
+##   Eprime.Basename = col_character(),
+##   Procedure = col_character(),
+##   Running = col_character(),
+##   Choice1.RESP = col_character(),
+##   Choice1.CRESP = col_character(),
+##   Choice.RESP = col_character(),
+##   Choice.CRESP = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.
+
+head(trial_df)
+
+##   Eprime.Level Eprime.LevelName              Eprime.Basename Eprime.FrameNumber
+## 1            3      TrialList_1 RTG1_1ITCscanner1LLA-05200-1                  2
+## 2            3      TrialList_2 RTG1_1ITCscanner1LLA-05200-1                  3
+## 3            3      TrialList_3 RTG1_1ITCscanner1LLA-05200-1                  4
+## 4            3      TrialList_4 RTG1_1ITCscanner1LLA-05200-1                  5
+## 5            3      TrialList_5 RTG1_1ITCscanner1LLA-05200-1                  6
+## 6            3      TrialList_6 RTG1_1ITCscanner1LLA-05200-1                  7
+##   Procedure   Running Offer delay NullDuration LeftRight FeedbackDur Cycle
+## 1 TrialProc TrialList  23.0    21         5000         0        1672     1
+## 2 TrialProc TrialList  28.0     5         5000         1        2328     1
+## 3 TrialProc TrialList  30.5    55         5000         1        1984     1
+## 4 TrialProc TrialList  39.0    34        17000         1        2440     1
+## 5 TrialProc TrialList  25.0     7         8000         0        1736     1
+## 6 TrialProc TrialList  22.5    45         2000         1        2584     1
+##   Sample nullscreen.OnsetDelay nullscreen.OnsetTime nullscreen.DurationError
+## 1      1                   303                54348                     -303
+## 2      2                     0                63045                        0
+## 3      3                     0                72045                        0
+## 4      4                     0                81045                        0
+## 5      5                     0               102045                        0
+## 6      6                     0               114045                        0
+##   nullscreen.StartTime nullscreen.OffsetTime nullscreen.FinishTime
+## 1                54047                 58845                 58845
+## 2                62853                 67845                 67845
+## 3                71854                 76845                 76845
+## 4                80853                 97845                 97845
+## 5               101854                109845                109845
+## 6               113853                115845                115845
+##   nullscreen.ActionDelay nullscreen.ActionTime nullscreen.OffsetDelay
+## 1                      0                 54348                      0
+## 2                      0                 63045                      0
+## 3                      0                 72045                      0
+## 4                      0                 81045                      0
+## 5                      0                102045                      0
+## 6                      0                114045                      0
+##   Choice1.OnsetDelay Choice1.OnsetTime Choice1.DurationError Choice1.Duration
+## 1                  0             59045               -999999             4000
+## 2                  0             59045               -999999             4000
+## 3                  0             59045               -999999             4000
+## 4                  0             59045               -999999             4000
+## 5                  0            110045               -999999             4000
+## 6                  0            110045               -999999             4000
+##   Choice1.StartTime Choice1.OffsetTime Choice1.FinishTime Choice1.OffsetDelay
+## 1             58846              61373              61373             -999999
+## 2             58846              61373              61373             -999999
+## 3             58846              61373              61373             -999999
+## 4             58846              61373              61373             -999999
+## 5            109846             112309             112309             -999999
+## 6            109846             112309             112309             -999999
+##   Choice1.RTTime Choice1.RT Choice1.RESP Choice1.CRESP
+## 1          61373       2328            y             r
+## 2          61373       2328            y             r
+## 3          61373       2328            y             r
+## 4          61373       2328            y             r
+## 5         112309       2264            y             r
+## 6         112309       2264            y             r
+##   FeedbackDisplay6.OnsetDelay FeedbackDisplay6.OnsetTime
+## 1                         939                      62312
+## 2                         939                      62312
+## 3                         939                      62312
+## 4                         939                      62312
+## 5                           3                     112312
+## 6                           3                     112312
+##   FeedbackDisplay6.DurationError FeedbackDisplay6.Duration
+## 1                           -939                      1672
+## 2                           -939                      1672
+## 3                           -939                      1672
+## 4                           -939                      1672
+## 5                             -3                      1736
+## 6                             -3                      1736
+##   FeedbackDisplay6.StartTime FeedbackDisplay6.OffsetTime
+## 1                      62310                       62845
+## 2                      62310                       62845
+## 3                      62310                       62845
+## 4                      62310                       62845
+## 5                     112311                      113845
+## 6                     112311                      113845
+##   FeedbackDisplay6.FinishTime FeedbackDisplay6.OffsetDelay Choice.OnsetDelay
+## 1                       62845                            0                 0
+## 2                       62845                            0                 0
+## 3                       62845                            0                 0
+## 4                       62845                            0                 0
+## 5                      113845                            0                 0
+## 6                      113845                            0                 0
+##   Choice.OnsetTime Choice.DurationError Choice.Duration Choice.StartTime
+## 1                0                    0            4000                0
+## 2            68045              -999999            4000            67846
+## 3            77045              -999999            4000            76846
+## 4            98045              -999999            4000            97847
+## 5            98045              -999999            4000            97847
+## 6           116045              -999999            4000           115846
+##   Choice.OffsetTime Choice.FinishTime Choice.TargetOffsetTime
+## 1                 0                 0                       0
+## 2             69717             69717                   71845
+## 3             79061             79061                   80845
+## 4             99605             99605                  101845
+## 5             99605             99605                  101845
+## 6            117461            117461                  119845
+##   Choice.TargetOnsetTime Choice.OffsetDelay Choice.RTTime Choice.RT Choice.RESP
+## 1                      0                  0             0         0        &lt;NA&gt;
+## 2                  68045            -999999         69717      1672           y
+## 3                  77045            -999999         79061      2016           r
+## 4                  98045            -999999         99605      1560           r
+## 5                  98045            -999999         99605      1560           r
+## 6                 116045            -999999        117461      1416           r
+##   Choice.CRESP FeedbackDisplay3.OnsetDelay FeedbackDisplay3.OnsetTime
+## 1         &lt;NA&gt;                           0                          0
+## 2            r                           3                      69720
+## 3            r                           3                      79064
+## 4            r                           3                      99608
+## 5            r                           3                      99608
+## 6            r                           3                     117464
+##   FeedbackDisplay3.DurationError FeedbackDisplay3.Duration
+## 1                              0                         0
+## 2                             -3                      2328
+## 3                             -3                      1984
+## 4                             -3                      2440
+## 5                             -3                      2440
+## 6                             -3                      2584
+##   FeedbackDisplay3.StartTime FeedbackDisplay3.OffsetTime
+## 1                          0                           0
+## 2                      69719                       71845
+## 3                      79063                       80845
+## 4                      99607                      101845
+## 5                      99607                      101845
+## 6                     117463                      119845
+##   FeedbackDisplay3.FinishTime FeedbackDisplay3.TargetOffsetTime
+## 1                           0                                 0
+## 2                       71845                             71845
+## 3                       80845                             80845
+## 4                      101845                            101845
+## 5                      101845                            101845
+## 6                      119845                            119845
+##   FeedbackDisplay3.TargetOnsetTime FeedbackDisplay3.OffsetDelay
+## 1                                0                            0
+## 2                            69717                            0
+## 3                            79061                            0
+## 4                            99605                            0
+## 5                            99605                            0
+## 6                           117461                            0
+</code></pre></div></div><p>Each line of this table indicates an event (trial) happening in the experiment. In an ITC task, participants are shown a value of money and a delay. They’re asked, “would you rather receive $20 now, or wait X number of days to receive $Y later?” Hence, each line is an offer in this paradigm.</p><h1 id="processing"> <a href="#processing" class="anchor-heading" aria-labelledby="processing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Processing</h1><p>We want to get this into BIDS standard. Here’s the proposed columns:</p><h4 id="mandatory-in-bids"> <a href="#mandatory-in-bids" class="anchor-heading" aria-labelledby="mandatory-in-bids"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Mandatory in BIDS:</h4><p><code class="language-plaintext highlighter-rouge">onset</code>: time that the trial happened from the start of the scan</p><p><code class="language-plaintext highlighter-rouge">duration</code>: how long that event happened for</p><h4 id="required-for-itc"> <a href="#required-for-itc" class="anchor-heading" aria-labelledby="required-for-itc"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Required for ITC</h4><p><code class="language-plaintext highlighter-rouge">choice</code>: did they choose the delayed offer or not</p><p><code class="language-plaintext highlighter-rouge">button_press</code>: did they go left or right</p><p><code class="language-plaintext highlighter-rouge">amount</code>: how much they were offered</p><p><code class="language-plaintext highlighter-rouge">delay</code>: what was the delay on the offer</p><p><code class="language-plaintext highlighter-rouge">reaction time</code>: how long did they take to make their decision</p><h2 id="data-wrangling"> <a href="#data-wrangling" class="anchor-heading" aria-labelledby="data-wrangling"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Data Wrangling</h2><p>The first thing we need to define is what choice they made. The column <code class="language-plaintext highlighter-rouge">LeftRight</code> indicates whether the instant $20 option is on the left or right of the screen. If <code class="language-plaintext highlighter-rouge">LeftRight == 1</code>, the delayed option was presented on the left.</p><p>We’ll code this as a factor <code class="language-plaintext highlighter-rouge">delay_position</code> with two levels, 1 to indicate it was on the right, and 0 to indicate it was on the left:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df %&gt;%
+  select(-contains("null"), -contains("Eprime"), -contains("Feedback")) %&gt;%
+  mutate(delay_position = ifelse(LeftRight == 0, 1, 0))
+</code></pre></div></div><p>Next, we define which button they pressed, left (0) or right (1):</p><p>We’ll also define the motor response they made, <code class="language-plaintext highlighter-rouge">button_press</code>, as either 1 (right) or 0 (left). We use <code class="language-plaintext highlighter-rouge">CHOICE.RESP</code> and <code class="language-plaintext highlighter-rouge">CHOICE1.RESP</code> as the indicator of which side they picked. If the delayed option was on the left, use <code class="language-plaintext highlighter-rouge">CHOICE.RESP</code>; <code class="language-plaintext highlighter-rouge">r</code> is right, <code class="language-plaintext highlighter-rouge">y</code> is left.</p><p>Then, we encode the <code class="language-plaintext highlighter-rouge">choice</code> as either <code class="language-plaintext highlighter-rouge">1=delayed</code> (the delayed position and the chosen button press where the same) or <code class="language-plaintext highlighter-rouge">0=now</code> (the delayed position and the chosen button press where different):</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df_proc %&gt;%
+  mutate(
+    button_press = case_when(
+      
+      LeftRight == 1 &amp; Choice.RESP == "y" ~ 0,
+      LeftRight == 1 &amp; Choice.RESP == "r" ~ 1,
+      LeftRight == 0 &amp; Choice1.RESP == "y" ~ 0,
+      LeftRight == 0 &amp; Choice1.RESP == "r" ~ 1
+      
+    ),
+    choice = case_when(
+      
+      LeftRight == 1 &amp; Choice.RESP == "y" ~ 1,
+      LeftRight == 1 &amp; Choice.RESP == "r" ~ 0,
+      LeftRight == 0 &amp; Choice1.RESP == "y" ~ 0,
+      LeftRight == 0 &amp; Choice1.RESP == "r" ~ 1
+      
+      )
+    )
+</code></pre></div></div><p>We also include the amount and delay:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df_proc %&gt;%
+  rename(offer = Offer) %&gt;%
+  select(offer, delay, choice, button_press, delay_position, everything())
+</code></pre></div></div><p>The duration of the trial is uniform at 4000ms. There are two columns for event timings: <code class="language-plaintext highlighter-rouge">Choice1.OnsetTime</code> and <code class="language-plaintext highlighter-rouge">Choice.OnsetTime</code>. If <code class="language-plaintext highlighter-rouge">LeftRight==1</code> the task proceeds to Choice.*. If they clicked right, the time for this gets recorded in <code class="language-plaintext highlighter-rouge">Choice.OnsetTime</code>, and the value in <code class="language-plaintext highlighter-rouge">Choice1.OnsetTime</code> is duplicated from the previous row:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10            216687           222699      ## left
+11            228727           222699      ## left
+12            246744           222699      ## right
+13            246744           264762      ## right
+14            246744           270774      ## right
+</code></pre></div></div><p>Here we use the <code class="language-plaintext highlighter-rouge">duplicated</code> function to tell us if a value in a vector is a duplicate of itself. If there’s a duplicate, take the value from the opposite column:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df_proc %&gt;%
+  mutate(
+    onset = case_when(
+       
+      # the first row should both not be duplicates
+      !duplicated(Choice.OnsetTime) &amp; !duplicated(Choice1.OnsetTime) ~ 0,
+      
+      # if any value in Choice is a duplicate, choose the value from Choice1
+      duplicated(Choice.OnsetTime) ~ Choice1.OnsetTime,
+      
+      # vice versa
+      duplicated(Choice1.OnsetTime) ~ Choice.OnsetTime
+    ),
+    
+    duration = 4000,
+    
+  ) %&gt;%
+  select(onset, duration, everything())
+</code></pre></div></div><p>We can do the same for response time:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df_proc %&gt;%
+  mutate(
+    row_num = row_number(),
+    response_time = case_when(
+       
+      # the first row should be the one that's not zero
+      row_num == 1 &amp; Choice.RT == 0 ~ Choice1.RT,
+      row_num == 1 &amp; Choice1.RT == 0 ~ Choice.RT,
+      
+      # if any value in Choice is a duplicate, choose the value from Choice1
+      duplicated(Choice.RT) ~ Choice1.RT,
+      
+      # vice versa
+      duplicated(Choice1.RT) ~ Choice.RT
+    )
+  ) %&gt;%
+  select(onset, duration, response_time, everything(), -row_num)
+</code></pre></div></div><p>Lastly, we have to account for the timepoint that the task began (as opposed to when the participant is reading instructions). This is given in the <code class="language-plaintext highlighter-rouge">slides_df</code>:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_proc &lt;- trial_df_proc %&gt;%
+  mutate(onset = ifelse(onset == 0, onset, onset - slides_df$Slide1.OffsetTime[2]))
+</code></pre></div></div><p>Here’s the data head so far:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_sv &lt;- trial_df_proc %&gt;%
+  select(onset:delay_position) %&gt;%
+  mutate(IA = 20)
+trial_df_sv %&gt;%
+  head()
+
+##   onset duration response_time offer delay choice button_press delay_position
+## 1     0     4000          2328  23.0    21      0            0              1
+## 2 14000     4000          1672  28.0     5      1            0              0
+## 3 23000     4000          2016  30.5    55      0            1              0
+## 4 44000     4000          1560  39.0    34      0            1              0
+## 5 56000     4000          2264  25.0     7      0            0              1
+## 6 62000     4000          1416  22.5    45      0            1              0
+##   IA
+## 1 20
+## 2 20
+## 3 20
+## 4 20
+## 5 20
+## 6 20
+</code></pre></div></div><p>From here, we write this data frame to a file.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trial_df_sv %&gt;% 
+  write_delim("/cbica/projects/wolf_satterthwaite_reward/Curation/code/itc_eprime/matlab_code/data/demo_trial.txt", delim = "\t")
+</code></pre></div></div><h1 id="subjective-value"> <a href="#subjective-value" class="anchor-heading" aria-labelledby="subjective-value"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Subjective Value</h1><p>We calculate the <code class="language-plaintext highlighter-rouge">k</code> parameter for ITC using a pre-compiled matlab script:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function []=kable_itc_wrapper(inputfile, outputfile)
+
+m = readtable(inputfile);
+type='h';
+
+choice = m.('choice');
+IA = m.('IA');
+DA = m.('offer');
+D = m.('delay');
+
+out = KableLab_ITC(type,choice,IA,DA,D);
+k_param=out.k;
+Tout = table(k_param);
+writetable(Tout,outputfile);
+disp(k_param);
+
+end
+
+% ------------------------------------- %
+% kable lab ITC code starts here
+% ------------------------------------- %
+function out = KableLab_ITC(type,choice,IA,DA,D)
+% data quality control by checking missed trials.
+if sum(choice ~= 0 &amp; choice ~= 1) ~= 0
+    error('choice input has non binary elements')
+end
+if sum(choice) == length(choice) || sum(choice) == 0
+    error('choices are all one-sided')
+end
+
+% type specifies the type of discounting function
+if strcmp(type,'e') || strcmp(type,'h')
+    out = fitoneparam(type,choice,IA,DA,D);
+%elseif strcmp(type,'g')
+%    out = fitgen(choice,IA,DA,D);
+%elseif strcmp(type,'q')
+%    out = fitquasi(choice,IA,DA,D);
+else
+    error('unknown discounting function type')
+end
+out.type = type;
+[~,dev] = mnrfit([],2-choice); % an intercept-only model
+out.LL0 = -dev/2; % LL of a null model
+out.r2 = 1 - out.LL/out.LL0; % McFadden's R-squared
+out.DV = out.SVlater-IA; % Decision Variable
+predictedChoice = out.DV&gt;=0;
+out.percentPredicted = sum(predictedChoice == choice) / length(choice) * 100;
+out.choicep = 1 ./ (1 + exp(-(out.noise.*out.DV)));
+out.choiceresid = out.choicep-choice;
+out.rawresid = out.DV-round(max(abs(out.DV))).*(2.*choice-1);
+end
+
+function out = fitoneparam(type,choice,IA,DA,D)
+if strcmp(type,'e') % exponential case
+    indiffk = -log(IA./DA)./D;
+else % hyperbolic case
+    indiffk = (DA-IA)./(IA.*D);
+end
+mink = min(indiffk)*(0.99);
+maxk = max(indiffk)*(1.01);
+[noise,ks] = meshgrid([-1,0,1], linspace(log(mink),log(maxk),5)); % search grid. We search in logspace
+b = [noise(:) ks(:)];
+info.negLL = inf;
+for i = 1:length(b)
+    [new.b,new.negLL] = fmincon(@negLL,b(i,:),[],[],[],[],[log(eps),log(mink)],[2,log(maxk)],[],...
+        optimset('Algorithm','interior-point','Display','off'),choice,IA,DA,D,type);
+    if new.negLL &lt; info.negLL
+        info = new;
+    end
+end
+out.k = exp(info.b(2));
+out.noise = exp(info.b(1));
+out.LL = -info.negLL;
+if strcmp(type,'e')
+    out.SVlater = DA.*exp(-out.k.*D);
+else
+    out.SVlater = DA./(1+out.k.*D);
+end
+end
+
+function negLL = negLL(beta,choice,IA,DA,D,type) % function for negative Log-Likelihood
+switch type
+    case 'e'
+        SVdelayed = DA.*exp(-exp(beta(2)).*D);
+    case 'h'
+        SVdelayed = DA./(1+exp(beta(2)).*D);
+    case 'q'
+        SVdelayed = exp(log(DA)+log(beta(2))+D.*log(beta(3)));
+        beta(1) = log(beta(1));
+    case 'g'
+        SVdelayed = DA./((1+exp(beta(2)).*D).^beta(3));
+        beta(1) = log(beta(1));
+end
+reg = exp(beta(1)).*(SVdelayed-IA);
+p = 1 ./ (1 + exp(-reg));
+p(p == 1) = 1-eps;
+p(p == 0) = eps;
+negLL = -sum((choice==1).*log(p) + (choice==0).*log(1-p));
+end
+</code></pre></div></div><p>Here’s how it’s called:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_kable_itc_wrapper.sh $MATLAB_DIR data/demo_trial.txt data/output_trial.txt
+</code></pre></div></div><p>And read it in:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k_param &lt;- read_table("/cbica/projects/wolf_satterthwaite_reward/Curation/code/itc_eprime/matlab_code/data/output_trial.txt") %&gt;%
+  pull(k_param)
+
+## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   k_param = col_double()
+## )
+
+k_param
+
+## [1] 0.07106205
+</code></pre></div></div><p>Finally, subjective value is calculated by <span class="math inline">\(\frac{\text{offer}} {1 + k \times \text{delay}}\)</span></p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final_df &lt;- trial_df_sv %&gt;%
+  mutate(subjective_value = offer / (1 + k_param * delay)) %&gt;%
+  mutate_if(~ is.numeric(.) &amp;&amp; all(unique(.) %in% c(0, 1, NA)), factor) %&gt;%
+  select(-IA) 
+</code></pre></div></div><h1 id="final-outputs"> <a href="#final-outputs" class="anchor-heading" aria-labelledby="final-outputs"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Final Outputs</h1><p>Here’s the final dataframe:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final_df
+
+##     onset duration response_time offer delay choice button_press delay_position
+## 1       0     4000          2328  23.0    21      0            0              1
+## 2   14000     4000          1672  28.0     5      1            0              0
+## 3   23000     4000          2016  30.5    55      0            1              0
+## 4   44000     4000          1560  39.0    34      0            1              0
+## 5   56000     4000          2264  25.0     7      0            0              1
+## 6   62000     4000          1416  22.5    45      0            1              0
+## 7   68000     4000          1344  37.5   149      0            1              0
+## 8   83000     4000          1200  40.5    97      0            1              0
+## 9   95000     4000          1656  31.5    68      0            0              1
+## 10 101000     4000          1168  46.5    48      0            1              0
+## 11 107000     4000          1544  31.5    48      0            0              1
+## 12 125000     4000          1536  27.5    53      0            0              1
+## 13 143000     4000          1224  43.0   161      0            1              0
+## 14 149000     4000          1536  48.0   107      0            1              0
+## 15 161000     4000          3464  41.5    15      1            1              1
+## 16 170000     4000          1248  39.0    48      0            0              1
+## 17 185000     4000          1048  25.5   149      0            1              0
+## 18 191000     4000          1344  20.5    84      0            0              1
+## 19 197000     4000          1352  38.0   178      0            0              1
+## 20 203000     4000          3168  31.5     7      0            0              1
+## 21 209000     4000          1072  25.5    84      0            1              0
+## 22 215000     4000          1312  34.0     7      1            1              1
+## 23 221000     4000          1272  20.5   161      0            0              1
+## 24 233000     4000          1696  41.5     7      1            0              0
+## 25 254000     4000           928  28.0    48      0            1              0
+## 26 263000     4000          1216  29.0     4      1            1              1
+## 27 269000     4000          1128  33.0    55      0            1              0
+## 28 278000     4000          1048  47.5    43      0            0              1
+## 29 290000     4000          1112  33.0   107      0            0              1
+## 30 296000     4000           824  22.5   178      0            1              0
+## 31 302000     4000          1016  50.0   124      0            1              0
+## 32 308000     4000          1192  30.0    34      0            0              1
+## 33 317000     4000          1424  26.5     7      0            1              0
+## 34 341000     4000          1032  25.5   124      0            1              0
+## 35 347000     4000           880  39.0   124      0            1              0
+## 36 356000     4000          1136  25.5   107      0            0              1
+## 37 365000     4000          1456  36.5    32      0            1              0
+## 38 371000     4000          1128  41.5   178      0            0              1
+## 39 380000     4000           760  45.0   149      0            1              0
+## 40 386000     4000          1096  44.0   124      0            0              1
+## 41 395000     4000          1336  29.0    68      0            0              1
+## 42 410000     4000          1488  29.0    17      0            0              1
+## 43 419000     4000          2328  26.5    29      0            0              1
+## 44 431000     4000          1256  48.0    23      0            0              1
+## 45 449000     4000          1368  30.5    97      0            0              1
+## 46 455000     4000          1272  44.0    34      0            1              0
+## 47 470000     4000           912  47.5    84      0            1              0
+## 48 482000     4000          1328  48.0    34      0            1              0
+## 49 491000     4000          1136  22.5   124      0            0              1
+## 50 500000     4000          1136  28.0   124      0            1              0
+##    subjective_value
+## 1          9.228413
+## 2         20.659477
+## 3          6.213822
+## 4         11.416496
+## 5         16.695223
+## 6          5.359961
+## 7          3.236038
+## 8          5.131117
+## 9          5.401032
+## 10        10.541879
+## 11         7.141273
+## 12         5.769689
+## 13         3.456317
+## 14         5.579035
+## 15        20.087799
+## 16         8.841576
+## 17         2.200506
+## 18         2.941509
+## 19         2.784078
+## 20        21.035981
+## 21         3.658950
+## 22        22.705503
+## 23         1.647779
+## 24        27.714070
+## 25         6.347798
+## 26        22.581305
+## 27         6.723151
+## 28        11.712004
+## 29         3.835586
+## 30         1.648467
+## 31         5.095960
+## 32         8.781920
+## 33        17.696936
+## 34         2.598940
+## 35         3.974849
+## 36         2.963862
+## 37        11.148492
+## 38         3.040506
+## 39         3.883246
+## 40         4.484445
+## 41         4.972378
+## 42        13.133732
+## 43         8.657869
+## 44        18.220280
+## 45         3.864174
+## 46        12.880149
+## 47         6.815692
+## 48        14.051072
+## 49         2.293182
+## 50         2.853738
+</code></pre></div></div><p>We pair this with a dictionary in BIDS describing how to interpret these columns, like:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "column": {
+        "LongName": "some name",
+        "Description": "long description",
+        "Levels": {
+            "go": "level one of a factor",
+            "stop": "leve two of a factor",
+        }
+    }
+}
+
+dictionary &lt;- final_df %&gt;%
+  select(-onset, -duration) %&gt;%
+  map(~ list(
+    LongName = "",
+    Description = ""
+  ))
+  
+dictionary$response_time$LongName &lt;- "Response Time to Offer"
+dictionary$response_time$Description &lt;- "How long it takes for the participant to choose and respond with a button press"
+
+dictionary$offer$LongName &lt;- "Offer Amount"
+dictionary$offer$Description &lt;- "Amount of money in dollars that the trial is offering"
+
+dictionary$delay$LongName &lt;- "Delay on Offer"
+dictionary$delay$Description &lt;- "Number of days to wait until they can receive the offer"
+
+dictionary$choice$LongName &lt;- "Choice made by the participant"
+dictionary$choice$Description &lt;- "Factor indicating whether the participant selected an offer of 20 dollars immediately, or an offer of more value at the delayed time"
+dictionary$choice$Levels &lt;- list(`1` = "Selected the delayed offer",
+                                 `0` = "Selected the immediate offer")
+
+dictionary$button_press$LongName &lt;- "Which button was pressed"
+dictionary$button_press$Description &lt;- "Factor indicating whether the participant pressed the button on the right or the left"
+dictionary$button_press$Levels &lt;- list(`1` = "Pressed the right hand button",
+                                 `0` = "Pressed the left hand button")
+
+dictionary$delay_position$LongName &lt;- "Position of the delayed option"
+dictionary$delay_position$Description &lt;- "Factor indicating which side of the screen the delayed option is on for the trial"
+dictionary$delay_position$Levels &lt;- list(`1` = "Delay on the right",
+                                 `0` = "Delay on the left")
+
+dictionary$subjective_value$LongName &lt;- "Subjective value of potential offer"
+dictionary$subjective_value$Description &lt;- "Participant's subjective value of the delayed offer calculated using a discount curve (as is common in the literature)" # should add paper link in here
+
+jsonlite::toJSON(dictionary) %&gt;%
+  jsonlite::prettify()
+
+## {
+##     "response_time": {
+##         "LongName": [
+##             "Response Time to Offer"
+##         ],
+##         "Description": [
+##             "How long it takes for the participant to choose and respond with a button press"
+##         ]
+##     },
+##     "offer": {
+##         "LongName": [
+##             "Offer Amount"
+##         ],
+##         "Description": [
+##             "Amount of money in dollars that the trial is offering"
+##         ]
+##     },
+##     "delay": {
+##         "LongName": [
+##             "Delay on Offer"
+##         ],
+##         "Description": [
+##             "Number of days to wait until they can receive the offer"
+##         ]
+##     },
+##     "choice": {
+##         "LongName": [
+##             "Choice made by the participant"
+##         ],
+##         "Description": [
+##             "Factor indicating whether the participant selected an offer of 20 dollars immediately, or an offer of more value at the delayed time"
+##         ],
+##         "Levels": {
+##             "1": [
+##                 "Selected the delayed offer"
+##             ],
+##             "0": [
+##                 "Selected the immediate offer"
+##             ]
+##         }
+##     },
+##     "button_press": {
+##         "LongName": [
+##             "Which button was pressed"
+##         ],
+##         "Description": [
+##             "Factor indicating whether the participant pressed the button on the right or the left"
+##         ],
+##         "Levels": {
+##             "1": [
+##                 "Pressed the right hand button"
+##             ],
+##             "0": [
+##                 "Pressed the left hand button"
+##             ]
+##         }
+##     },
+##     "delay_position": {
+##         "LongName": [
+##             "Position of the delayed option"
+##         ],
+##         "Description": [
+##             "Factor indicating which side of the screen the delayed option is on for the trial"
+##         ],
+##         "Levels": {
+##             "1": [
+##                 "Delay on the right"
+##             ],
+##             "0": [
+##                 "Delay on the left"
+##             ]
+##         }
+##     },
+##     "subjective_value": {
+##         "LongName": [
+##             "Subjective value of potential offer"
+##         ],
+##         "Description": [
+##             "Participant's subjective value of the delayed offer calculated using a discount curve (as is common in the literature)"
+##         ]
+##     }
+## }
+## 
+</code></pre></div></div><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2022 Ted Satterthwaite. Distributed by an <a href="https://github.com/PennLINC/Reward/blob/master/LICENSE.txt">MIT license.</a></p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div>

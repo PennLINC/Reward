@@ -1,0 +1,4 @@
+I"<h1 id="processing-task-event-files">Processing Task Event Files</h1>
+
+<p>In addition to preprocessing, we also attempted to parse ITC events files into BIDS valid format. The notebook with progress is available <a href="/projects/itc_eprime/itc_eprime/">here</a></p>
+:ET

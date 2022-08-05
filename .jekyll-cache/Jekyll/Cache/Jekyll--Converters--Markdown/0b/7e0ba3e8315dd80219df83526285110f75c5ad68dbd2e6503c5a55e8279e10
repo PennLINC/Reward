@@ -1,11 +1,11 @@
-I"0<h1 class="no_toc" id="fndm1">FNDM1</h1>
+I".<h1 class="no_toc" id="fndm1">FNDM1</h1>
 
 <details open="">
   <summary class="text-delta">
     Table of contents
   </summary>
 <ol id="markdown-toc">
-  <li><a href="#data-processing-flow--important-links" id="markdown-toc-data-processing-flow--important-links">Data Processing Flow &amp; Important Links:</a></li>
+  <li><a href="#data-processing-flow" id="markdown-toc-data-processing-flow">Data Processing Flow</a></li>
   <li><a href="#plan-for-the-data" id="markdown-toc-plan-for-the-data">Plan for the Data</a></li>
   <li><a href="#data-acquisition" id="markdown-toc-data-acquisition">Data Acquisition</a></li>
   <li><a href="#download-and-storage" id="markdown-toc-download-and-storage">Download and Storage</a></li>
@@ -34,18 +34,12 @@
 
 </details>
 
-<h1 id="data-processing-flow--important-links">Data Processing Flow &amp; Important Links:</h1>
+<h1 id="data-processing-flow">Data Processing Flow</h1>
 <ul>
   <li>Flow diagram that describes the lifecycle of this dataset curation and preprocessing:</li>
 </ul>
 
 <p><img src="../DataProcessingFlow_fndm1.drawio.svg" alt="flow" /></p>
-
-<ul>
-  <li>DSR GitHub Project Page(Curation/Validation and Processing Queue Status):</li>
-</ul>
-
-<p><a href="https://github.com/PennLINC/Reward/projects/1">https://github.com/PennLINC/Reward/projects/1</a></p>
 
 <h1 id="plan-for-the-data">Plan for the Data</h1>
 
@@ -53,11 +47,6 @@
   <li>Why does PennLINC need this data?
     <blockquote>
       <p>Acquired at UPenn</p>
-    </blockquote>
-  </li>
-  <li>For which project(s) is it intended? Please link to project pages below:
-    <blockquote>
-      <p><a href="https://github.com/PennLINC/Reward/">Reward Project</a></p>
     </blockquote>
   </li>
   <li>Goal:

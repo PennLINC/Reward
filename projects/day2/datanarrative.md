@@ -16,10 +16,6 @@ nav_order: 1
     *note: gzip error, can be rerun with later version*
    * subjects/scans with poor QC: sub-15433 T1w (euler=782); sub-17378 card1, card2, face1, face2 (normCrossCorr <0.8); sub-15276 face2 (normCrossCorr <0.8); sub-15433 card 2 (normCrossCorr <0.8); 
     *note: paths to XCP-generated .html reports for each subject and concatenated qc values provided below*
-       
-* DSR GitHub Project Page(Curation/Validation and Processing Queue Status):
-   * Cards for tracking the curation and validation portion of the dataset. This page should be updated every time you perform an action on the data. 
-   * Cards for tracking the progress of containerized pipeline runs on the data. 
    
 ### Plan for the Data 
 

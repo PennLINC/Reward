@@ -1,4 +1,4 @@
-I"ý/<h1 class="no_toc" id="fndm2">FNDM2</h1>
+I"b.<h1 class="no_toc" id="fndm2">FNDM2</h1>
 
 <details open="">
   <summary class="text-delta">
@@ -41,23 +41,12 @@
 
 <p><img src="../DataProcessingFlow_fndm2.drawio.png" alt="flow" /></p>
 
-<ul>
-  <li>DSR GitHub Project Page(Curation/Validation and Processing Queue Status):</li>
-</ul>
-
-<p><a href="https://github.com/PennLINC/Reward/projects/1">https://github.com/PennLINC/Reward/projects/1</a></p>
-
 <h1 id="plan-for-the-data">Plan for the Data</h1>
 
 <ul>
   <li>Why does PennLINC need this data?
     <blockquote>
       <p>Acquired at UPenn</p>
-    </blockquote>
-  </li>
-  <li>For which project(s) is it intended? Please link to project pages below:
-    <blockquote>
-      <p><a href="https://github.com/PennLINC/Reward/">Reward Project</a></p>
     </blockquote>
   </li>
   <li>Goal:

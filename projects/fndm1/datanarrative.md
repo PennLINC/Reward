@@ -17,21 +17,15 @@ nav_order: 1
 {:toc}
 </details>
 
-# Data Processing Flow & Important Links:
+# Data Processing Flow
 * Flow diagram that describes the lifecycle of this dataset curation and preprocessing:
 
 ![flow](../DataProcessingFlow_fndm1.drawio.svg)
-       
-* DSR GitHub Project Page(Curation/Validation and Processing Queue Status):
-
-[https://github.com/PennLINC/Reward/projects/1](https://github.com/PennLINC/Reward/projects/1)
    
 # Plan for the Data 
 
 * Why does PennLINC need this data?
 > Acquired at UPenn
-* For which project(s) is it intended? Please link to project pages below:
-> [Reward Project](https://github.com/PennLINC/Reward/)
 * Goal:
 > Curate and preprocess an amalgam of datasets for a harmonized PennLINC resource
 

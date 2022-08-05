@@ -1,4 +1,4 @@
-I"™<h2 id="data-narrative-for-day2---margarets-curation">Data Narrative for DAY2 - Margaretâ€™s Curation</h2>
+I"°—<h2 id="data-narrative-for-day2---margarets-curation">Data Narrative for DAY2 - Margaretâ€™s Curation</h2>
 
 <h3 id="data-processing-flow--important-links">Data Processing Flow &amp; Important Links:</h3>
 <ul>
@@ -11,12 +11,6 @@
   <em>note: gzip error, can be rerun with later version</em></li>
       <li>subjects/scans with poor QC: sub-15433 T1w (euler=782); sub-17378 card1, card2, face1, face2 (normCrossCorr &lt;0.8); sub-15276 face2 (normCrossCorr &lt;0.8); sub-15433 card 2 (normCrossCorr &lt;0.8); 
   <em>note: paths to XCP-generated .html reports for each subject and concatenated qc values provided below</em></li>
-    </ul>
-  </li>
-  <li>DSR GitHub Project Page(Curation/Validation and Processing Queue Status):
-    <ul>
-      <li>Cards for tracking the curation and validation portion of the dataset. This page should be updated every time you perform an action on the data.</li>
-      <li>Cards for tracking the progress of containerized pipeline runs on the data.</li>
     </ul>
   </li>
 </ul>
