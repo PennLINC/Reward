@@ -21,11 +21,7 @@ nav_order: 1
 * Flow diagram that describes the lifecycle of this dataset curation and preprocessing:
 
 ![flow](../DataProcessingFlow_nodra.drawio.png)
-       
-* DSR GitHub Project Page(Curation/Validation and Processing Queue Status):
-
-[https://github.com/PennLINC/Reward/projects/1](https://github.com/PennLINC/Reward/projects/1)
-   
+          
 # Plan for the Data 
 
 * Why does PennLINC need this data?

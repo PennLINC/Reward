@@ -26,8 +26,7 @@ NA
 
 * Why does PennLINC need this data?
 > Acquired at UPenn
-* For which project(s) is it intended? Please link to project pages below:
-> [Reward Project](https://github.com/PennLINC/Reward/)
+
 * Goal:
 > Curate and preprocess an amalgam of datasets for a harmonized PennLINC resource
 
