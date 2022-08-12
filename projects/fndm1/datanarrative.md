@@ -20,7 +20,7 @@ nav_order: 1
 # Data Processing Flow
 * Flow diagram that describes the lifecycle of this dataset curation and preprocessing:
 
-![flow](../DataProcessingFlow_fndm1.drawio.svg)
+![flow](../DataProcessingFlow_fndm1.svg)
    
 # Plan for the Data 
 
