@@ -20,7 +20,7 @@ nav_order: 1
 # Data Processing Flow & Important Links:
 * Flow diagram that describes the lifecycle of this dataset curation and preprocessing:
 
-NA
+![flow](../DataProcessingFlow_cogtrain.svg)
    
 # Plan for the Data 
 
@@ -78,7 +78,7 @@ Data at this stage were approved for preprocessing.
    
 Testing directory was deleted to save space on CUBIC on 12/2/21, once production completed
    
-### Production Testing:
+### Production:
 
 * 291/293 sessions completed fMRIPrep successfully
 * Path to production inputs: `/cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/CogTrain/BIDS`
@@ -88,7 +88,7 @@ Testing directory was deleted to save space on CUBIC on 12/2/21, once production
 * Path to freesurfer production audit: NA
       
 ## XCP-ABCD (version 0.0.8)
-### Production Testing:
+### Production:
 
 * 289/293 sessions completed XCP successfully
 * Path to production inputs: `/cbica/projects/wolf_satterthwaite_reward/Curation/bidsdatasets/CogTrain/fmriprep-multises/merge_ds`
@@ -97,18 +97,3 @@ Testing directory was deleted to save space on CUBIC on 12/2/21, once production
 * Path to xcp production audit: NA
 * Path to xcp derivatives: `/cbica/projects/wolf_satterthwaite_reward/Production/CogTrain/xcp-derivatives/XCP`
 * Path to xcp derivatives (concatenated): NA
-
-# Post Processing 
-           
-* Who is using the data/for which projects are people in the lab using this data?
-   * Link to project page(s) here 
-* For each post-processing analysis that has been run on this data, fill out the following
-   * Who performed the analysis?
-   * Where it was performed (CUBIC, PMACS, somewhere else)?
-   * GitHub Link(s) to result(s)
-   * Did you use pennlinckit?  
-      * https://github.com/PennLINC/PennLINC-Kit/tree/main/pennlinckit           
-
-### To Do 
-   * backup to PMACS
-   * Add task events files
